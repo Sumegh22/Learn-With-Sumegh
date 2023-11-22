@@ -3,17 +3,17 @@ package test.coding.challenges;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DuplicateWordsinAString {
+public class DuplicateCharactersinAString {
 
 	public static void findDuplicates(String str) {
 		
-		Map<String, Integer> hm = new HashMap<>();
-		String[] sar= str.split(" ");
-		for(String s: sar) {
-			if(hm.get(s)!=null) {
-				hm.put(s, hm.get(s)+1);
+		Map<Character, Integer> hm = new HashMap<>();
+		char[] ch = str.toCharArray();
+		for(char c: ch) {
+			if(hm.get(c)!=null) {
+				hm.put(c, hm.get(c)+1);
 			}else {
-				hm.put(s, 1);
+				hm.put(c, 1);
 			}
 		}System.out.println(hm);
 		

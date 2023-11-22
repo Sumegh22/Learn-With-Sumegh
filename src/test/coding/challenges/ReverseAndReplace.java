@@ -1,6 +1,7 @@
 package test.coding.challenges;
 
 public class ReverseAndReplace {
+//replace vowels in a String by the index at which they occur and then reverse the String
 
 	public static void main(String[] args) {
 
@@ -21,6 +22,7 @@ public class ReverseAndReplace {
 				sb.append(str.charAt(i));
 			}
 		}
+		System.out.println(sb);
 		sb.reverse();
 		System.out.println(sb);
 		

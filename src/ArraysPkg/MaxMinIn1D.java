@@ -10,7 +10,7 @@ public class MaxMinIn1D {
 	    int s = sc.nextInt();
 	    
 	    int [] arr= new int [s];
-	    System.out.println("Enter the elememts of Array");
+	    System.out.println("Enter the elements of Array");
 	    
 	    for(int i=0;i<s;i++) {arr[i] = sc.nextInt();}
 	    
