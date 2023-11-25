@@ -87,8 +87,7 @@ In the context of a Spring application, the classpath is crucial for locating co
 * Answer: AOP is a programming paradigm that enables modularization of cross-cutting concerns. In Spring, the AOP module allows developers to define aspects, which are modules encapsulating cross-cutting concerns, and apply them to objects in a declarative way.
 
 #### Q6: Explain the concept of advice, join point, and pointcut in AOP.
-Answer:
-* 
+* Answer:
 Advice: Code that runs at a certain point, often before or after a method execution.
 Join Point: A point during the execution of a program, such as the execution of a method or the handling of an exception.
 Pointcut: A set of join points, allowing the developer to specify where advice should be applied.*
