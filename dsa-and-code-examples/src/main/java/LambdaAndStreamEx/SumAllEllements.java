@@ -1,4 +1,4 @@
-package funtionalProgEx;
+package LambdaAndStreamEx;
 
 import java.util.List;
 
