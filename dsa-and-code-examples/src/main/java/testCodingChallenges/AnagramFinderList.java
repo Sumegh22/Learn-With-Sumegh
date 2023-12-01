@@ -20,19 +20,30 @@ public class AnagramFinderList {
             anagramMap.computeIfAbsent(sortedWord, k -> new ArrayList<>()).add(word);
         }
 
+        // Create List of Strings for words which are anagrams
+        List<List<String>> ListOfAanagramsList = new ArrayList<>();
+
         // Filter out groups with only one word (non-anagrams)
-        List<List<String>> result = new ArrayList<>();
+        List<String> nonAnagrams = new ArrayList<>();
+
         for (List<String> group : anagramMap.values()) {
+            if (group.size() == 1) {
+                nonAnagrams.add(group.get(0));
+            }
             if (group.size() > 1) {
-                result.add(group);
+                ListOfAanagramsList.add(group);
             }
         }
 
-        return result;
+        System.out.println("This list contains, words which were not ANagrams"+ nonAnagrams+"\n");
+
+
+
+        return ListOfAanagramsList;
     }
 
     public static void main(String[] args) {
-        List<String> words = Arrays.asList("listen", "silent", "enlist", "heart", "earth", "night", "thing");
+        List<String> words = Arrays.asList("listen", "silent", "enlist", "heart", "earth", "night", "thing", "Adrak", "Lassan", "Hahaha");
 
         List<List<String>> anagramGroups = findAnagrams(words);
 
