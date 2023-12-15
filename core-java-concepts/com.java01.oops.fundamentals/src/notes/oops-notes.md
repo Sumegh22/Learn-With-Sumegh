@@ -128,6 +128,7 @@ Using the finalize() method (deprecated as of Java 9) to perform cleanup operati
 Remember that explicitly invoking garbage collection methods (System.gc() or Runtime.getRuntime().gc()) doesn't guarantee immediate garbage collection, as the JVM decides when it's appropriate based on its internal algorithms. It's generally better to rely on the automatic garbage collection mechanisms unless there are specific reasons to intervene.
 
 
+## 
 
 **Note:** Hashcode is not an address of object
 
@@ -136,6 +137,7 @@ Remember that explicitly invoking garbage collection methods (System.gc() or Run
 * protected
 * private
 
+![image](https://github.com/Sumegh22/Learn-With-Sumegh/assets/84231944/57de1d78-b63e-4ee3-8a38-4d496ad175a5)
 
 ### Static : 
 static methods do not need objects of a class to be created. Static vars/ methods are object independent. hence you cannot/ must not use this keywords inside constructor or methods to reference static things, use the class name instead.
