@@ -67,6 +67,69 @@ GB is an automatic process, managed by JVM. After any operation when a good amou
 
 As stated earlier it is automatic process you do not have any control over it, but there could be certain operations or tasks that you would want to execute before your ibject is destroyed, you can put those operations in finalize
 
+
+### types of garbage collectors:
+
+**Serial Garbage Collector:** Suitable for small applications with low memory requirements.
+
+**Parallel Garbage Collector:** Also known as the throughput collector, it uses multiple threads to improve garbage collection performance for medium to large-sized applications.
+
+**Concurrent Mark-Sweep (CMS) Garbage Collector:** Designed for applications where low latency is crucial, it minimizes pauses by running most of its tasks concurrently with the application threads.
+
+**Garbage-First (G1) Garbage Collector:** Introduced in Java 7, it is a server-style garbage collector that aims to provide both low pause times and high throughput by dividing the heap into regions.
+
+Each garbage collector has its strengths and is suited for specific use cases, allowing developers to choose the one that best fits the application's requirements.
+
+
+### Ways to garbage collect an object in Java
+
+In Java, objects are automatically garbage collected by the Java Virtual Machine (JVM) when they are no longer reachable. However, developers can influence or expedite garbage collection in several ways:
+
+Nullifying References:
+
+
+	SomeClass obj = new SomeClass();
+	// do something with obj
+	obj = null; // Set the reference to null to make the object eligible for garbage collection
+ 
+Calling System.gc():
+
+	System.gc(); // Suggests to the JVM that it's a good time to run garbage collection
+	
+ 
+Using Runtime.getRuntime().gc():
+
+	Runtime.getRuntime().gc(); // Similar to System.gc(), suggests garbage collection
+ 
+Weak References:
+Using weak references allows objects to be collected even if there are only weak references pointing to them.
+
+	WeakReference<SomeClass> weakRef = new WeakReference<>(obj);
+	obj = null;
+	// The object can be garbage collected if there are no strong references to it
+ 
+Phantom References:
+Similar to weak references, but with stricter constraints. Phantom references are enqueued after the object is finalized.
+
+	PhantomReference<SomeClass> phantomRef = new PhantomReference<>(obj, referenceQueue);
+	obj = null;
+	// The object can be collected, and the reference is enqueued for additional cleanup
+
+
+Finalization (Deprecated):
+Using the finalize() method (deprecated as of Java 9) to perform cleanup operations before an object is garbage collected.
+
+	@Override
+	protected void finalize() throws Throwable {
+	    // Cleanup operations
+	    super.finalize();
+	}
+ 
+Remember that explicitly invoking garbage collection methods (System.gc() or Runtime.getRuntime().gc()) doesn't guarantee immediate garbage collection, as the JVM decides when it's appropriate based on its internal algorithms. It's generally better to rely on the automatic garbage collection mechanisms unless there are specific reasons to intervene.
+
+
+## 
+
 **Note:** Hashcode is not an address of object
 
 ## Access mods:
@@ -74,6 +137,7 @@ As stated earlier it is automatic process you do not have any control over it, b
 * protected
 * private
 
+![image](https://github.com/Sumegh22/Learn-With-Sumegh/assets/84231944/57de1d78-b63e-4ee3-8a38-4d496ad175a5)
 
 ### Static : 
 static methods do not need objects of a class to be created. Static vars/ methods are object independent. hence you cannot/ must not use this keywords inside constructor or methods to reference static things, use the class name instead.
@@ -116,7 +180,9 @@ steps to do this
 Meaning many ways to represent.
 Static polymorphism, compile time poly, is when a method is overloaded, meaning when the params of a method are different. or at least order of params is different. method name should be same here.
 
-Dynamic poly, runtime poly, is when a method is overridden. In this case, Same method name, same params but operation is different, at may be return type.
+Dynamic poly, runtime poly, is when a method is overridden. In this case, Same method name, same params but operation is different, and may be different return type.
+Java supports* covariant return types for overridden methods. This means an overridden method may have a more specific return type. That is, as long as the new return type is assignable to the return type of the method you are overriding, it's allowed.
+If you don't have the same or narrower return type then you will get :: error: method() in subclass cannot override method() in superclass
 
 Final key word, Final methods cannot be overridden, this means, when a final method is called, the compiler will call the byte code of this method, no matter how many time you make a call to it, and since there is no change, it increases execution efficiency and makes execution faster
 
@@ -242,9 +308,56 @@ Exception: when the normal flow of your code/ program meets with an unexpected h
 
 
 
-**Next Topic Collection FrameWork and Generics**
+**How to make a class immutable in Java**
 
 
+To make a class immutable in Java, you need to follow a set of guidelines that prevent the modification of its state once an object is created. Here are the key steps:
 
+Make the class final: Prevent the class from being extended to avoid any changes to its behavior in subclasses.
+
+
+	public final class ImmutableClass {
+	    // class implementation
+	}
+ 
+Make fields private and final: Encapsulate the state by making fields private and final. This ensures that they can only be initialized once during object creation.
+
+	public final class ImmutableClass {
+	    private final int intValue;
+	    private final String stringValue;
+
+	    public ImmutableClass(int intValue, String stringValue) {
+	        this.intValue = intValue;
+	        this.stringValue = stringValue;
+	    }
+	
+	    // getters for fields, but no setters
+	}
+
+Do not provide setter methods: Avoid providing methods that can modify the internal state of the object.
+
+Ensure mutable objects are safely handled: If your class contains references to mutable objects, ensure that they are not exposed directly. Either make defensive copies or return immutable copies.
+
+
+	public final class ImmutableClass {
+	    private final List<String> mutableList;
+	
+	    public ImmutableClass(List<String> mutableList) {
+	        this.mutableList = new ArrayList<>(mutableList); // Defensive copy
+	    }
+	
+	    public List<String> getMutableList() {
+	        return new ArrayList<>(mutableList); // Return a copy, not the original list
+	    }
+	}
+
+Make the class Serializable (optional): If you want your immutable class to be serializable, implement the Serializable interface. This is optional but can be useful in certain scenarios.
+
+
+	public final class ImmutableClass implements Serializable {
+	    // class implementation
+	}
+ 
+By following these guidelines, you ensure that instances of your class cannot be modified once they are created, providing the immutability property.
 
 
