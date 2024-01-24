@@ -15,10 +15,17 @@
 3. Since there isn't any micro-service that is awaiting to send response, systems are very Loosely coupled.
 
 ## Why Kafka
+**Apache Kafka is an open-source, distributed event streaming platform**
 1. Kafka uses pull mechanism to read message
 2. other MQ services use push mechanism
 3. Queue discard messages when read. Kafka retain them as defined
 4. Message replay
+
+## Example:
+1. PayTm users across globe make payments-> which creates an event, Once Kafka server recieves data, the client ( written by Devs as Paytm) can consume messages/ events from here and act accordingly.
+2. Giving cashback to user
+3. Restricting free upi transactions in a day (Post which user will be charged)
+4. 
 
 ## Key Terminologies in Kafka world :
 1. Kafka Cluster : Group of Kafka Brokers 
