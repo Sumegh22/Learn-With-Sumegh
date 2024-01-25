@@ -14,25 +14,33 @@
 2. Services work asynchronously, and simply broadcast events or commands in the form of messages
 3. Since there isn't any micro-service that is awaiting to send response, systems are very Loosely coupled.
 
-## Why Kafka
+## What is Kafka 
 **Apache Kafka is an open-source, distributed event streaming platform**
-1. Kafka uses pull mechanism to read message
-2. other MQ services use push mechanism
-3. Queue discard messages when read. Kafka retain them as defined
-4. Message replay
+* Kafka works on a pub-sub model -> meaning the publisher service will produce and publish message on a specific topic and then the subscriber service will consume messages from the topics**
+* Since it is distributed, It can sustain heavy load and is fault tolerance
+* Kafka can retain message for long-long time as configured. 
+* As the name suggests it acts as a broker between communicating services. 
+* event streaming can be simplified as creation of an event stream and processing it in real time
 
 ## Example:
 1. PayTm users across globe make payments-> which creates an event, Once Kafka server recieves data, the client ( written by Devs as Paytm) can consume messages/ events from here and act accordingly.
 2. Giving cashback to user
 3. Restricting free upi transactions in a day (Post which user will be charged)
-4. 
+
+## Why use it ?..
+1. Kafka uses pull mechanism to read message
+2. other MQ services use push mechanism
+3. Queue discard messages when read. Kafka retain them as defined
+4. Message replay
+
+![kafka-architecture-img.png](..%2Fimages%2Fkafka-architecture-img.png)
 
 ## Key Terminologies in Kafka world :
 1. Kafka Cluster : Group of Kafka Brokers 
 2. Broker : An individual server or instance of kafka. A broker acts as a station between your producing agent (MS) and a consuming agent (MS)
 3. Producer: Producer produces/ writes on kafka broker using a kafka topic.
 4. Consumer: Consumer consumes/ reads messages from Kafka broker using kafka topic
-5. Zookeeper: Keeps track of Kafka CLuster health
+5. Zookeeper: Zookeeper is a pre-requisite to kafka, Kafka is a distributed system, and it uses Zookeeper for coordination. Keeps track of Kafka CLuster health, topics partitions etc.
 6. Kafka-Connect: If you want to pull data from external entity into Kafka cluster -> then you can use kafka-connect. This is called declarative integration.
    For inward movement from source -> kafka-broker use kafka-connect-source integration
    For outward movement from kafkabroker to external db -> use kafka-connect-sink 
