@@ -1,8 +1,6 @@
 
 # Notes : Core Java Execution and Basics
 
-https://github.com/kunal-kushwaha/DSA-Bootcamp-Java/tree/main/lectures
-
 ## Fundamentals
 Programming languages and thier way of interacting with computer
 1. Procedural
@@ -372,4 +370,5 @@ Make the class Serializable (optional): If you want your immutable class to be s
  
 By following these guidelines, you ensure that instances of your class cannot be modified once they are created, providing the immutability property.
 
-
+=======================================================================================================================================================
+ref : https://github.com/kunal-kushwaha/DSA-Bootcamp-Java/tree/main/lectures
