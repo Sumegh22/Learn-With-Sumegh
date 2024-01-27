@@ -39,8 +39,9 @@
         So this is all about Covariant return type in Java.
 
 ## Polymorphism
-Ability of an object to take
-Many forms. Any object in java that passes IS-A test is polymorphic and since all objects extends Object class hence all object are polymorphic.
+* Ability of an object to take Many forms.
+* Any object in java that passes IS-A test is polymorphic and since all objects extends Object class hence all object are polymorphic.
+* Polymorphism in Java has two types: Compile time polymorphism (static binding) and Runtime polymorphism (dynamic binding). Method overloading is an example of static polymorphism, while method overriding is an example of dynamic polymorphism.
 
 * To implement polymorphism in java we have 2 ways :
     * Static can be implemented by overloading
@@ -51,3 +52,21 @@ Many forms. Any object in java that passes IS-A test is polymorphic and since al
 * Methods having same names but different Parameters is method overloading. Eg
     * Add(a,b) and Add(a,b,c)
       Both methods add all arguments
+
+### Static Polymorphism (method overLoading : No associated annotation)
+* Methods having same names but different Parameters is method overloading or static polymorphism. Eg
+Add(a,b) and Add(a,b,c)
+Both methods add all arguments
+
+**Imp**
+* Overloading / static polymorphism is not possible by changing the return type only. It gives compile time error due to ambiguity.
+
+**Real-Life-example**
+* Frog: Since a frog can behave as an aquatic animal and also as a Terrestrial animal Hence Frog is Polymorphic object.
+* 
+
+### Dyanamic Polymorphism (method overriding :  @Override)
+* Method overriding is one of the ways in which Java supports Runtime Polymorphism. Dynamic method dispatch is the mechanism by which a call to an overridden method is resolved at run time, rather than compile time.
+* if a superclass contains a method that is overridden by a subclass, then when different types of objects are referred to through a superclass reference variable, different versions of the method are executed.
+* In this video we find an answer with live example for Runtime Polymorphism or dynamic polymorphism with Data Members
+* In Java, we can override methods only, not the variables(data members), so runtime polymorphism or dynamic polymorphism cannot be achieved by instance variables or data members.
