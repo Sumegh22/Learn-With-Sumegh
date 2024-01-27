@@ -46,7 +46,19 @@ Significance of "new" keyword >When we create any instance of a class, we create
 
 Student s = new [constructor of Student Class]
 
-**Pass by value:** Java is pass by value and not pass by reference, because when you use any method and pass a variables as input to it, only the value of the variable is taken into consideration and operations as performed on this given value, once the method execution is completed if you compare the variable passed and value of the output there may or may not be difference based upon method body, but one thing worth noticing is the memory address of both the vars that we are talking about would be different. this proves java is pass by reference
+**Pass by value or ref:** 
+* Java is pass by value and not pass by reference, 
+* real-Life ex: If a teacher (Jvm) wants to provide notes (object) to student for homework (assume homework as a method here). If this student who got notes changes/ manipulates or say destroy notes, then other students have nothing.
+* Teacher Providing notes, can be considered as providing actual memory location of the object, thus if the manipulation is done here the actual object will be changed.
+
+**explanation:** When you use any method and pass a variable as input to it, a copy of the value of that variable is taken into consideration and operations aare performed on this given value, once the method execution is completed if you compare the variable passed and value of the output there may or may not be difference based upon method body, but one thing worth noticing is the memory address of both the vars that we are talking about would be different. this proves java is pass by value and not reference
+
+**IMPORTANT:**
+## What happens when you pass object references to a method?..
+* If you pass object references to a method the object refernce (values of attributes inside this reference) can be changed.
+* Because when we pass object refernce we -> this indicates that we are passing a memory address to a method
+* So if any modification is done it is done on top of your obj-ref hence comparing an object before and after a method execution
+  would differ based on what task is perform in the method you passed your object to
 
 
 **this keyword :** In Java this keyword points to the current object under consideration. The object on which any operation is being performed, for example if you are creating an object of a class then, while defining the params of this object, you pass values to constructor at that point, parameterised constructor is called which handles definition of variables and params for current object which is being defined, and all of this is being done using the this keyword
