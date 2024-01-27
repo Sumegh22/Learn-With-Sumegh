@@ -70,3 +70,9 @@ Both methods add all arguments
 * if a superclass contains a method that is overridden by a subclass, then when different types of objects are referred to through a superclass reference variable, different versions of the method are executed.
 * In this video we find an answer with live example for Runtime Polymorphism or dynamic polymorphism with Data Members
 * In Java, we can override methods only, not the variables(data members), so runtime polymorphism or dynamic polymorphism cannot be achieved by instance variables or data members.
+
+### Default methods in interface:
+* Before Java 8, interfaces could have only abstract methods.
+* The implementation of these methods has to be provided in a separate class.
+* So, if a new method is to be added in an interface, then its implementation code has to be provided in the class implementing the same interface.
+* To overcome this issue, Java 8 has introduced the concept of default methods which allow the interfaces to have methods with implementation without affecting the classes that implement the interface.
