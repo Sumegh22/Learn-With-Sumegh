@@ -63,7 +63,7 @@ Both methods add all arguments
 
 **Real-Life-example**
 * Frog: Since a frog can behave as an aquatic animal and also as a Terrestrial animal Hence Frog is Polymorphic object.
-* 
+
 
 ### Dyanamic Polymorphism (method overriding :  @Override)
 * Method overriding is one of the ways in which Java supports Runtime Polymorphism. Dynamic method dispatch is the mechanism by which a call to an overridden method is resolved at run time, rather than compile time.
@@ -76,3 +76,34 @@ Both methods add all arguments
 * The implementation of these methods has to be provided in a separate class.
 * So, if a new method is to be added in an interface, then its implementation code has to be provided in the class implementing the same interface.
 * To overcome this issue, Java 8 has introduced the concept of default methods which allow the interfaces to have methods with implementation without affecting the classes that implement the interface.
+
+## Diamond Problem (Ambiguity due to default method in Inheritance):
+* Diamond problem (in inheritance) is an ambiguity problem that can arise as a consequence of allowing multiple inheritance through default methods that were introduced in java 8.
+* But if you have two interfaces having default method with same name, and a class implements both these interfaces, then ambiguity arises. 
+* as a result java compiler tells us upfront to override default method from one of the interfaces. 
+
+## Static method in interfaces:
+* This came along with default methods in interface as in Java 8.
+* Simple reason that the implementing classes should not be allowed to override the method.
+
+## Pass by value and refernece:
+* When you use any method and pass a variable as input to it, a copy of the value of that variable is taken into consideration and operations aare performed on this given value, once the method execution is completed if you compare the variable passed and value of the output there may or may not be difference based upon method body, but one thing worth noticing is the memory address of both the vars that we are talking about would be different. this proves java is pass by value and not reference
+
+**IMPORTANT:**
+## What happens when you pass object references to a method?..
+* If you pass object references to a method the object refernce (values of attributes inside this reference) can be changed.
+* Because when we pass object refernce we -> this indicates that we are passing a memory address to a method
+* So if any modification is done it is done on top of your obj-ref hence comparing an object before and after a method execution
+  would differ based on what task is perform in the method you passed your object to
+
+## Equals and Hashcode
+* equals and hashcode contract By default, the Java super class java.lang.Object provides two important methods for comparing objects: equals() and hashcode(). 
+* These methods become very useful when implementing interactions between several classes in large projects. In this article, we will talk about the relationship between these methods, their default implementations, and the circumstances that force developers to provide a custom implementation for each of them.
+* equals(Object obj): a method provided by java.lang.Object that indicates whether some other object passed as an argument is "equal to" the current instance. The default implementation provided by the JDK is based on memory location --- two objects are equal if and only if they are stored in the same memory address.
+* hashcode(): a method provided by java.lang.Object that returns an integer representation of the object memory address. By default, this method returns a random integer that is unique for each instance. This integer might change between several executions of the application and won't stay the same
+
+## How equals and hashcode contract works in java ?
+* The default implementation is not enough to satisfy business needs, especially if we're talking about a huge application that considers two objects as equal when some business fact happens. In some business scenarios, developers provide their own implementation in order to force their own equality mechanism regardless the memory addresses.
+* As per the Java documentation in perspective of equal and hashcode contract, developers should override both methods in order to achieve a fully working equality mechanism --- it's not enough to just implement the equals() method.
+* equals and hashcode in java,equals and hashcode in java by durga,equals and hashcode contract in java,equals and hashcode contract,equals and hashcode in java telusko,equals and hashcode method in java,java equals and hashcode,java equals and hashcode contract,what is equals and hashcode contract,
+* what is equals and hashcode in java? ,how equals and hashcode works in java ? ,equals and hashcode implementation,hashcode and equals method in java,java,equals and hashcode contract example,contract between equals and hashcode in java
