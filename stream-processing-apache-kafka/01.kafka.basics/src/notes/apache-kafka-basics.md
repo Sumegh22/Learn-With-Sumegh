@@ -5,7 +5,7 @@
 2. Client stay idle and wait for response
 3. Latency subject to chain of actions
 
-## Asycn
+## Asynchronous 
 1. The client can make a request and can do other processing whilst it awaits the response
 
 
