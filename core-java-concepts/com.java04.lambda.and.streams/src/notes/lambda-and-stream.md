@@ -20,18 +20,39 @@ Functional Intefaces
 --------------------
 
 -   A functional interface has the following attributes:
-    -   It is an interface
-    -   Has only one abstract method
+    -   **It is an interface**
+    -   **Has Single Abstract Method (SAM)**
     -   Has the `@FunctionalInterface` annotation. However, the compiler will treat any interface meeting the definition of a functional interface as a functional interface. It does not need to be marked with the `@FunctionalInterface` annotation.
 -   Java 8 introduced some new concepts to interfaces:
     -   allow static method
     -   default methods (this allows for multiple inheritance of behaviour for Java).
 -   So, an interface can be a functional interface with static and default methods providing it has ONLY ONE abstract method.
 
+Types of FunctionalInterfaces
+---------------------------
+-   Predicate<T> : Takes in an argument of type 'T' and returns *boolean* : SAM = .test(T t);
+-   Function<T,R> : Takes in T as input and returns *R* as resultant type (both types (T,R) maybe or may not be same) : SAM =  R apply(T t);
+-   UnaryOperator<T> : Same as Function, it is a child of Function, as a result it has all methods from parent interface except for the static method identity. :                         SAM = T apply(T t);
+-   Consumer<T> : Consumes an input of type 'T' : SAM = accpet(T t);
+-   Supplier<T> : Supplies a value of Specified type : SAM =  T get();
+
+-  Similarly we also have
+-  BiPredicate <T,U>
+-  BiFunction <T,U, R>
+-  BinaryOperator <T>
+-  BiConsumer <T,U>
+-  **There is no such thing as BiSupplier**
+
+
+
+
+
+
+
 Functional Programming
 ----------------------
 
--   Using the Stream API and Lambdas requires a new way of thinking: Functional Programming.
+-   Using the Stream API and Lambdas requires a new way of thinking: Functional Programming. Uding functional programming fucntions can be treated as first-class citizens. Meaning functions can be passed as arguments, can be used as variables etc.
     -   A name is only ever associated with one value
     -   The order of execution does not impact the results
     -   There is no fixed execution order
