@@ -46,13 +46,10 @@ Types of FunctionalInterfaces
 
 
 
-
-
-
 Functional Programming
 ----------------------
 
--   Using the Stream API and Lambdas requires a new way of thinking: Functional Programming. Uding functional programming fucntions can be treated as first-class citizens. Meaning functions can be passed as arguments, can be used as variables etc.
+-   Using the Stream API and Lambdas requires a new way of thinking: Functional Programming. Using functional programming fucntions can be treated as first-class citizens. Meaning functions can be passed as arguments, can be used as variables etc.
     -   A name is only ever associated with one value
     -   The order of execution does not impact the results
     -   There is no fixed execution order
@@ -107,7 +104,7 @@ String r = process(list, (x, y) -> x.length() - y.length())
 
 Things to note about the above code:
 
--   The comparator operation is implemented as a lambda expression.
+-   The comparator operation is implemented as a lambda expression. Why because Comparator interface also has Single Abstract Method (SAM) compareTo which takes in two arguments it is Like BiPredicate<T,U>
 -   The compiler is able to infer the type of parameters `x` and `y`. It can do so in this case, because `list` was defined as a `String`. Since the `process` method states that both the `List` and `Comparator` parameters are of the same type, `T`, then the compiler can infer the `x` and `y` parameters in the lambda expression MUST be a String.
 -   Parameters x and y are still statically typed, the compiler is simplying infering the type.
 -   You can also explicitly state the type as follows:
@@ -203,6 +200,7 @@ Referencing External Variables In Lambda Expressions
         -   It is not assoicated with a class so there CANNOT be a 'this' for the Lambda
     -   WARNING: The compiler will insert a reference to 'this' for you where required.
 
+
 Elements Of A Stream
 --------------------
 
@@ -210,6 +208,7 @@ Elements Of A Stream
 -   Streams are NOT a data structure
 -   The Stream can be infinite
     -   No concept of breaking out out of a Stream as there is not concept of loops
+-   Streams can be generated from scrath using Streams.generate() or Streams.iterate() methods. 
 -   Can think of a Stream as a pipeline (although this is not how it is implemented internally)
 -   The pipeline conists of 3 things:
     -   A source of elements we are going to process
@@ -221,6 +220,7 @@ Elements Of A Stream
             -   A side effect (i.e. printing a message)
 -   The pipeline is only evaluated when the terminal operation is called
 -   Internal to the library are stream characteristics to help identify optimisations (i.e. identifying streams with distinct (unique) elements)
+
 
 Example of a stream pipeline:
 
@@ -253,7 +253,16 @@ int[] evenValues = Arrays.stream(values)
     -   Streams may be changed from sequential to parallel (and vice-versa)
         -   But you can't do both. The processing must be done either sequentially or parallel
         -   Last call wins (so if you have declared both sequential and parallel in your pipeline, the last call will determine how it is processed.)
-    -   See the [Streams API](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html) for the intermediate operations available.
+    -   See the [Streams API](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html) for the intermediate operations available, some examples are
+        -   filter : filters based on a predicate
+        -   map : maps an element in Stream to user defined
+        -   flatmap : reduces nested streams to a single stream
+        -   sorted : sorts object if they implement comparable, otherwise you have to provide an instance of comparator
+        -   skip (n) : skips 'n' elements from the ongoing stream
+        -   limit(m) : reduces the length of ongoing stream to 'm' values
+        -   distinct() : provides result set that contains disticnt values, underthe hood it uses object.equals()
+        -   peek() : Can be used to check current state of any element in the Stream : ex : .peek( e- > Logger.info("current value is: {} ",e)
+      
 -   Terminal Operations
     -   Terminates the pipeline of operations on the stream
     -   Only at this point is any processing performed
@@ -263,7 +272,13 @@ int[] evenValues = Arrays.stream(values)
             -   Elimination of redundant operations
             -   Parallel execution
     -   Generates an explicit result or a side effect
-    -   See the [Streams API](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html) for the terminal operations available.
+    -   See the [Streams API](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html) for the terminal operations available. Some example are mentioned below
+        -   reduce : reduces the entire Stream to a single element, takes two arguments
+        -   collect :
+        -   collectingAndThen
+        -   groupingBy
+                                 
+
 
 Reductions
 ----------
@@ -283,11 +298,11 @@ String longestWord = words.stream()
         .get();
 ```
 
-Collectors
+Collectors class
 ----------
 
--   collect is a terminal operation
--   You can collect into a Collection (Set, List or Map)
+-   collect is a terminal operation,
+-   You can collect elements of a stream into a Collection (Set, List or Map), using Collectors class : ex collect(Collectors.toList)
 -   You can group results using `groupingBy`
 -   You can join string results using `joining`
 -   There are many numeric collectors such as `summarizingInt` and `maxBy(Comparator)`
@@ -353,6 +368,24 @@ if (x != null) {
 //using Optional
 opt.ifPresent(this::print);
 ```
+
+
+CompletableFuture
+-------------------
+
+- This class is added as java.util.concurrent.CompletableFuture. It is an extension of Java's Future API which was introduced in Java 5
+- It has the below mentioned methods
+    - runAsync() : runs in the background and doesn't return a value
+    - supplyAsync() : runs in the backg and we have to fetch value bu invoking get method
+    - get
+    - thenApply()/thenAccept() : based on conditions we can Provide or Consum
+
+
+
+
+
+
+
 
 Logger Class Changes
 --------------------
