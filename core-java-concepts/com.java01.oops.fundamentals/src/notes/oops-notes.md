@@ -225,6 +225,51 @@ Giving flexibility to the child classes to implement existing methods based upon
 
 - You cannot create, Object of an abstract class, why because if the method is abstract, and you if you try to call this method through an object, how will it implement?..
 - Constructors cannot be abstract, yet abstract classes have constructor, why ?, because if there are variables in abstract class, and you want to update the default value of that variable in any of a child class, then you can do that !.
+- 
+In Java, abstract classes can indeed have constructors, including parameterized constructors. However, you cannot directly create an object of an abstract class using the new keyword. The primary purpose of constructors in abstract classes is to be called by the constructors of their concrete subclasses.
+
+- Initialization of Fields: Abstract classes may have fields that need to be initialized during construction. By having a constructor, you ensure that the initialization logic is executed when an instance of a concrete subclass is created. Parameters can be passed up the class hierarchy using the super keyword
+
+- Enforcement of a Common Structure: Abstract classes may provide a common structure or behavior that should be shared among all concrete subclasses. Constructors in the abstract class can enforce certain initialization steps or behaviors that should be consistent across all subclasses.
+
+```
+abstract class Shape {
+    protected String name;
+
+    // Parameterized constructor in the abstract class
+    public Shape(String name) {
+        this.name = name;
+    }
+
+    // Abstract method to be implemented by subclasses
+    abstract double calculateArea();
+}
+
+class Circle extends Shape {
+    private double radius;
+
+    // Constructor of the concrete subclass calling the constructor of the abstract class
+    public Circle(String name, double radius) {
+        super(name); // Calling the constructor of the abstract class
+        this.radius = radius;
+    }
+
+    // Implementation of the abstract method
+    @Override
+    double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Circle circle = new Circle("Circle1", 5.0);
+        System.out.println("Area of " + circle.name + ": " + circle.calculateArea());
+    }
+}
+
+
+```
 
 **Interface:**
 - An interface is a completely "abstract class" that is used to group related methods with empty bodies.
