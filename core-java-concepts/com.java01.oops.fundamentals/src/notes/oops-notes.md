@@ -298,20 +298,26 @@ Can I implement a Java interface method as private or protected?
 - Classic examples of interface is Serializable, Comparable, Comparator
 
 ## comparable vs comparator :
+-------------------------
 https://www.javatpoint.com/difference-between-comparable-and-comparator
 https://www.baeldung.com/java-comparator-comparable
 
-- class Student implements Comparable<Student>{  
-  public int compareTo(Student st)   {  
-  if(age==st.age)  
-  return 0;  
-  else if(age>st.age)  
-  return 1;  }
+```
+  class Student implements Comparable<Student>{  
+	  public int compareTo(Student st)   {  
+	  if(age==st.age)  
+	    return 0;  
+	  else if(age>st.age)  
+	     return 1;
+	}
+
   }
+  ```
 
 ------------------------------------------------------------------------------
 Similarly 
 
+```
 class Student implements Comparator
 public int compare(Student old_st, Student new_st)   {  
 if(old_st.age==new_st.age)  
@@ -319,6 +325,7 @@ return 0;
 else if(old_st.age>new_st.age)  
 return 1;  }
 }
+```
 
 When to Use Which:
 
@@ -326,22 +333,39 @@ When to Use Which:
 2. Use Comparator when you want to provide multiple sorting strategies for a class or when you want to sort objects based on criteria that are not intrinsic to the class. This allows you to sort objects in different ways without modifying the class itself.
 3. In summary, if you control the class and want to define the default way of sorting its objects, implement Comparable. If you want to provide different ways to sort objects of a class without modifying the class itself, use Comparator.
 
----------------------------------------------
+-------------------------------------------------------
 
 **Serializable:**
 - Serializable is a marker interface (has no data member and method). It is used to "mark" Java classes so that the objects of these classes may get a certain capability. The Cloneable and Remote are also marker interfaces.
+
+- Serialization in Java is a mechanism of writing the state of an object into a byte-stream. It is mainly used in Hibernate, RMI, JPA, EJB and JMS technologies.
+The reverse operation of serialization is called deserialization where byte-stream is converted into an object. The serialization and deserialization process is platform-independent, it means you can serialize an object on one platform and deserialize it on a different platform.
+- For serializing the object, we call the writeObject() method of ObjectOutputStream class, and for deserialization we call the readObject() method of ObjectInputStream class.
+- We must have to implement the Serializable interface for serializing the object.
 - The Serializable interface must be implemented by the class whose object needs to be persisted.
 - The String class and all the wrapper classes implement the java.io.Serializable interface by default.
 - Let's see the example given below: https://www.javatpoint.com/serialization-in-java
 
-## Lambdas, Streams and Functional Programming
 
-Lambda functions are oneline functions (short hand functions). Kind of abstract methods that are overridden in your main code
+---------------------------------------------
+
+
+## Lambdas, Streams and Functional Programming
+--------------
+
+Lambda functions are oneline functions (short hand functions). Kind of abstract methods that are overridden in your main code. 
+Lambdas can be performed using Functional interfaces. 
+Functional Interfaces are those that have only Single Abstract Method (SAM) present in them, besides they can have many default and static methods
+Default methods are introduced to support backward compatibility. 
+
   ![img.png](../oops-images/img.png)
 
+------------------------------------------------
 
 ## Exception Handling
+---------------------------------
 The object class is extended by Throwable, which is the root of exception handling.
+The Parent of all Exceptions is Exception class
   ![img_1.png](../oops-images/img_1.png)
 
 Error: When programs encounter an issue and terminate. The state of a program cannot be retained after an error is encountered.
@@ -349,16 +373,20 @@ Error: When programs encounter an issue and terminate. The state of a program ca
 Exception: when the normal flow of your code/ program meets with an unexpected hurdle. Which can be handled
 1. Exception can be either **Checked Exception** (Compile time exception) or **Unchecked Exception** (Runtime exception).
 2. To throw an exception explicitly through a method, you have to mention in the method signature that the method throws Exception.
+3. Or you can call the throw wild card to throw an exception if a certain scenario is met. 
 
   `static void doSomething(int a, int b) throws ArithemeticException {
   }`
 
-3. To handle this make use of a try-catch block, try block tries to execite a particular operatn and if any error is encountered then it is
-   addressed in the catch block. the code written in finally block would execute no matter what. We can put closer of resource, in this block. 
+4. To handle this make use of a try-catch block, try block tries to execute a particular operatn and if any error is encountered then it is
+   addressed in the catch block. the code written in finally block would execute no matter what. We can put closure of resource, in finally block. 
 
   ![img_2.png](../oops-images/img_2.png)
 
+  -----------------------------------------------------------
+
 ## Object Clonning
+--------------------------------------------
 1. When we try to create one object from another using new keyword like as shown below
 `    A a = new A(x, y);
      A b = new A (a);`
@@ -366,21 +394,24 @@ Exception: when the normal flow of your code/ program meets with an unexpected h
 2. To perform obkect cloning java.lang has a package has an interface called Cloneable
 3. Here Shallow copy is created by default. To make a deep copy, you have to override clone method from object class. 
 
+----------------------------------------------
+
 
 
 **How to make a class immutable in Java**
+-----------------------------------------------
 
 
 To make a class immutable in Java, you need to follow a set of guidelines that prevent the modification of its state once an object is created. Here are the key steps:
 
-Make the class final: Prevent the class from being extended to avoid any changes to its behavior in subclasses.
+**Make the class final:** Prevent the class from being extended to avoid any changes to its behavior in subclasses.
 
 
 	public final class ImmutableClass {
 	    // class implementation
 	}
  
-Make fields private and final: Encapsulate the state by making fields private and final. This ensures that they can only be initialized once during object creation.
+**Make fields private and final:** `Encapsulate` the state by making fields private and final. This ensures that they can only be initialized once during object creation.
 
 	public final class ImmutableClass {
 	    private final int intValue;
@@ -394,11 +425,11 @@ Make fields private and final: Encapsulate the state by making fields private an
 	    // getters for fields, but no setters
 	}
 
-Do not provide setter methods: Avoid providing methods that can modify the internal state of the object.
+**Do not provide setter methods:** Avoid providing methods that can modify the internal state of the object.
 
-Ensure mutable objects are safely handled: If your class contains references to mutable objects, ensure that they are not exposed directly. Either make defensive copies or return immutable copies.
+**Ensure mutable objects are safely handled:** If your class contains references to mutable objects, ensure that they are not exposed directly. Either make defensive copies or return immutable copies.
 
-
+```
 	public final class ImmutableClass {
 	    private final List<String> mutableList;
 	
@@ -410,6 +441,7 @@ Ensure mutable objects are safely handled: If your class contains references to 
 	        return new ArrayList<>(mutableList); // Return a copy, not the original list
 	    }
 	}
+ ```
 
 Make the class Serializable (optional): If you want your immutable class to be serializable, implement the Serializable interface. This is optional but can be useful in certain scenarios.
 
