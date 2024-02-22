@@ -88,6 +88,7 @@ System.out.println("The sum is: " + sum);
 -   Note with the iternal iteration code that an accumulator is not used by our code. Also, the processing does not need to be done sequentially, it could be done in parallel.
 
 ### Type Inference
+--------------------------------
 
 The compiler is now smarter and can infer type. For example, given the following method definition:
 
@@ -104,7 +105,7 @@ String r = process(list, (x, y) -> x.length() - y.length())
 
 Things to note about the above code:
 
--   The comparator operation is implemented as a lambda expression. Why because Comparator interface also has Single Abstract Method (SAM) compareTo which takes in two arguments it is Like BiPredicate<T,U>
+-   The comparator operation is implemented as a lambda expression. Why because Comparator interface also has Single Abstract Method (SAM) compareTo which takes in two arguments it is Like Predicate<T>
 -   The compiler is able to infer the type of parameters `x` and `y`. It can do so in this case, because `list` was defined as a `String`. Since the `process` method states that both the `List` and `Comparator` parameters are of the same type, `T`, then the compiler can infer the `x` and `y` parameters in the lambda expression MUST be a String.
 -   Parameters x and y are still statically typed, the compiler is simplying infering the type.
 -   You can also explicitly state the type as follows:
