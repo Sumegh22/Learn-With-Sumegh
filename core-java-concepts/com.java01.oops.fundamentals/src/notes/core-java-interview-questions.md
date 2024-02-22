@@ -48,7 +48,7 @@
     * Dynamic can be implemented by Overriding
 
 * If child class has same method (with same signature) as defined in parent class is overriding
-* A process in which a call to overridden method is resolved at runtime rather than compile time.
+* A process in which a call to overridden method is resolved at runtime rather than compile time is called method overriding and how this happens is called dynamic method dispatch.
 * Methods having same names but different Parameters is method overloading. Eg
     * Add(a,b) and Add(a,b,c)
       Both methods add all arguments
