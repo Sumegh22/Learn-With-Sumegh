@@ -19,7 +19,7 @@ JDK consists of JRE which has JVM Along with some additional file required by JV
 5. The JVM is present inside JRE.
 
 5. Memory is managed by jvm itself by the process of garbage collection
-6. The conputer memory is devided in two parts. Stack and Heap. The variables/ ref variables are stored in stack and the actual object is created in heap
+6. The computer memory is devided in two parts. Stack and Heap. The variables/ ref variables are stored in stack and the actual object is created in heap
 7. GC clears out memory in heap.
 8. when a class say Demo is public class, then it should be declared in a separate file. meaning any inner class cannot be public class.
 9. Explain PSVM and SOPLn.
@@ -36,9 +36,11 @@ https://github.com/kunal-kushwaha/DSA-Bootcamp-Java/tree/main/lectures/17-oop/no
 
 **Class :** a Class is a logical construct. It is kind of a stencil or casket based on which objects are created.
 
-**Objects:** Object is an instance of a class. Like as I said class is a stencil, so object is something that is created using that stencil. Objects exists physically.
-Instance Variables: vars defined inside an object, whose scope is limited to that particular obkect only are called instance vars
-ref-variables: vars named used for objects.
+**Objects:** 
+- Object is an instance of a class. Like as I said class is a stencil, so object is something that is created using that stencil. Objects exists physically.
+
+- **Instance Variables:** vars defined inside an object, whose scope is limited to that particular obkect only are called instance vars
+- **Ref-variables:** vars named used for objects.
 
 Significance of "new" keyword >When we create any instance of a class, we create an object, this new keyword is used in scenario where we want to create a totally new object. it calls the constructor of class to create objects
 
