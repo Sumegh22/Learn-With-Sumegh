@@ -29,7 +29,7 @@ Type casting between two datatypes can happen only when following conditions are
 1. The two types must be compatible
 2. The destination type should be greater than the source type
 
-===================================================================================================================
+---------------------------------------------
 
 ## OOPS Fundamentals
 https://github.com/kunal-kushwaha/DSA-Bootcamp-Java/tree/main/lectures/17-oop/notes
@@ -70,7 +70,7 @@ Student sumegh = new Student( 14, "Sumegh T", 98.09f)  then interanally it would
 		this.percentage = percentage; 
 	}
 	
-===================================================================================================================
+---------------------------------------------
 
 ## Garbage collection and finalize:
 GB is an automatic process, managed by JVM. After any operation when a good amount of memory is utilized, the  JVM hits GC method, this first checks for objects that are unreferenced or idle. say the objects that are there in heap mem, but no ref variable is pointing to it, such things will be cleared.
@@ -168,9 +168,8 @@ steps to do this
 2. initialize a private object of that class, within itself
 3. create a static method which can be called from other places that will check if an object exist,  will create if not and will then return the only object created for this class.
 
+---------------------------------------------
 
-
-===================================================================================================================
 
 ## OOPs Pillars
 
@@ -186,6 +185,7 @@ steps to do this
 - if we create an Object like
 -  A obj = new B (), here the ref variable is of type A and hence determines what type of methods and vars object can access, meaning only the vars and methods in A, but suppose if a method in A is overriden in B then, if we call such method, the impl in B will be executed. by a phenomenon called dynamic method dispatch
 -------------------------------------------------------------------------------------------------------------------------------------
+
 **Polymorphism**
 Meaning many ways to represent.
 Static polymorphism, compile time poly, is when a method is overloaded, meaning when the params of a method are different. or at least order of params is different. method name should be same here.
@@ -204,7 +204,10 @@ Overriding depends on object, Static does not depends on object, Hence STATIC CA
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 **Encapsulation:**
-Wrapping up of implementation of variables, methods and components  in a class. Hiding internal impl of a class and its data members.
+- Wrapping up of implementation of variables, methods and components  in a class. Hiding internal impl of a class and its data members.
+- This is done, so that the child classes or others cannot access it. To do this one has to mark methods and member variables as private and now they become hidden from everyone else except, methods] in same class
+
+
 Example
 
 -------------------------------------------------------------------------------------------------------------------------------------
@@ -276,7 +279,7 @@ When to Use Which:
 2. Use Comparator when you want to provide multiple sorting strategies for a class or when you want to sort objects based on criteria that are not intrinsic to the class. This allows you to sort objects in different ways without modifying the class itself.
 3. In summary, if you control the class and want to define the default way of sorting its objects, implement Comparable. If you want to provide different ways to sort objects of a class without modifying the class itself, use Comparator.
 
-===================================================================================================================
+---------------------------------------------
 
 **Serializable:**
 - Serializable is a marker interface (has no data member and method). It is used to "mark" Java classes so that the objects of these classes may get a certain capability. The Cloneable and Remote are also marker interfaces.
@@ -370,5 +373,5 @@ Make the class Serializable (optional): If you want your immutable class to be s
  
 By following these guidelines, you ensure that instances of your class cannot be modified once they are created, providing the immutability property.
 
-=======================================================================================================================================================
+---------------------------------------------
 ref : https://github.com/kunal-kushwaha/DSA-Bootcamp-Java/tree/main/lectures
