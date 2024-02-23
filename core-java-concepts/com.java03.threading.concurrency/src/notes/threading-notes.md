@@ -12,16 +12,16 @@
 * Some task; here it will print 1500 T's.
 
 
-    class Task {
+    	class Task {
     
-        public void doTask() {
-        for(int i=1; i <= 1500; i++) {
-            System.out.print("T");
-        }
-        }
-    }
+	        public void doTask() {
+		        for(int i=1; i <= 1500; i++) {
+		            System.out.print("T");
+		        }
+	        }
+   	   }
 
-* Main
+ Main
 
       public class Main {
       
@@ -40,11 +40,11 @@
       }
 
 When you run the above example you will see 1500 M's first and then followed by 1500 T's.
+------------------------------------------------------
 
 
-
-===================================================================================================================================
-### True Parallelism vs Logical Parallelism**
+### True Parallelism vs Logical Parallelism
+-------------------------------------
 
 * True Parallelism vs Logical Parallelism
 * True parallelism is achieved by assigning tasks to individual CPUs or Processors. This is possible through multicore processors or executing the tasks using multiple CPUs.
@@ -64,7 +64,7 @@ When you run the above example you will see 1500 M's first and then followed by 
 
 
 
-    class Task extends Thread {
+      class Task extends Thread {
 
           // Thread execution begins here.
         public void run() {
@@ -77,7 +77,7 @@ When you run the above example you will see 1500 M's first and then followed by 
               System.out.print("T");
           }
         }
-    }
+      }
 
 -----------------------------------------------------------------------------------------------------
 
@@ -101,9 +101,10 @@ When you run the above example you will see 1500 M's first and then followed by 
 
 Here main() and Task are run using two separate threads, which means they are executed in parallel (logical parallelism in case of single CPU) and hence you will see output like MMMTTTMMMTTT...
 
-=============================================================================================================================
+-------------------------------------------------------
 
 ### Designing Threads
+------------------------------------------------------
 
 **Thread -**
 A thread is a light weight process, it is given its own context and stack etc. for preserving the state. Thread state enables the CPU to switch back and continue from where it stopped.
@@ -144,6 +145,7 @@ Execution of the thread should be initiated using the start() method of the Thre
         }
 
     }
+    
 -----------------------------------------------------------------------------------------------------
 
 **2. Implementing the Runnable interface,**
@@ -196,7 +198,7 @@ Execution of the thread should be initiated using the start() method of the Thre
 
 There are three threads in the above program (system threads ignored). One the Main thread that prints "M" and thr that prints "T" and thr2 that prints "-". Because they are executed in parallel, you will see the output like MMMTTT---MMMTTT--- ...
 
-=============================================================================================================================
+---------------------------------------------------------------------
 
 ### Transform code to achieve parallelism
 
@@ -246,6 +248,7 @@ A simple utility to copy the content
             }
           }
 
+--------------------------------------------------------------------------------------------
 
 **Serial Mode -**
 In the below example we are making a direct call to copyFile and it is executed in serial order i.e. first Copy a.txt to c.txt is executed and then once it is done, the next copy i.e. b.txt to d.txt will be initiated.
@@ -275,6 +278,7 @@ Note - For this program to work you need to create two files a.txt and b.txt in 
       }
     }
 
+---------------------------------------------------------------------------------------
 
 **Parallel Mode -**
 The two copy operations above are initiated through two different threads, which enables us to perform the operation in parallel. For this we defined a CopyTask which is a Runnable task, you should pass the source and the destination to the constructor which are then used to perform the copy operation once the task execution begins.
@@ -330,7 +334,7 @@ The two copy operations above are initiated through two different threads, which
 **Important Note -**
 Although the main thread is completed after starting the two other threads, application won't be terminated until both the threads are done with the copy.
 
-==========================================================================================================================
+---------------------------------------------------------------------------------------------------------------
 
 ### Executor Service
 **ExecutorService -**
@@ -377,7 +381,7 @@ ExecutorService executor = Executors.newFixedThreadPool(5);
           executor.execute(new CopyTask(sourceFile2, destFile2));	
         }
   }
-===================================================================================================================
+------------------------------------------------------------------------------------------------
 
 ### Stopping Thread in the middle
 
@@ -445,7 +449,8 @@ sleep() method -
 
 sleep() method of the thread class is used to block the thread for the given time interval in milliseconds. This method throws InterruptedException if the thread is interrupted while it is in sleep.
 
-========================================================================================================================
+----------------------------------------------------------------------------------------------------
+
 ### Thread States
 
 **Thread States -**
@@ -477,7 +482,7 @@ sleep() method of the thread class is used to block the thread for the given tim
 **yield() method -**
   yield() method is important in few scenarios, suppose a thread is given 5 min of CPU time, now after a minute thread knows that it doesn't need the CPU anymore with in that time period, in such scenarios do you think that blocking the CPU for the next four minutes is a good idea ? No, it is better to pass on the control to the threads if any waiting for CPU and that is when we can use the yield() method. Usage Thread.yield(), it is a static method of the Thread class and it affects the current thread from which the method is invoked.
 
-========================================================================================================================
+------------------------------------------------------------------------------------------
 
 ### Thread Priorities
 Let us look at how we can change the thread priorities.
@@ -527,7 +532,7 @@ Just think about a software installer app, the thread that copies the files shou
         progressThread.start();
       }
     }
-========================================================================================================================
+---------------------------------------------------------------------------
 
 ### Internal System Threads and ThreadGroup
 
@@ -625,7 +630,7 @@ Thread[DemoThread,4,MyGroup]
 **Technical Note -**
 It is important to note that even the main method runs with a thread called the main thread. And its default priority is 5.
 
-========================================================================================================================
+---------------------------------------------------------------------
 
 ### Daemon Threads
 Daemon threads are the ones which does not prevent the JVM from exiting the application once it finishes. Daemon threads are handy for performing background tasks such as garbage collection or collecting application statistics etc. Note that the Java Virtual Machine exits when the only threads running are all daemon threads.
@@ -695,7 +700,7 @@ MMTTMMT
 
 A combination of M and T but the application ends once the main ends.
 
-========================================================================================================================
+---------------------------------------------------------------------
 ### Callable Task
 
 **Callable interface -**
@@ -789,7 +794,7 @@ Example -
          System.out.println( "Result is " + z );
       }
     }
-========================================================================================================================
+---------------------------------------------------------------------
 
 ### Notes - Pattern Search in folder
 **Pattern Finder Example -**
@@ -1006,7 +1011,7 @@ Here we are creating a fixed thread pool of size 3 and using it to search the fi
 
 IMPORTANT NOTE - If a thread doesn't need CPU, it is always a good idea to pass the control to the other threads so that CPU time is effectively utilized.
 
-========================================================================================================================
+---------------------------------------------------------------------
 
 ### Thread Synchronization
 
@@ -1275,7 +1280,7 @@ You can see that list object is locked by Thread1 and hence even when the contro
 
 So when it comes to synchronizing operations synchronized blocks are always better choice over synchronized methods.
 
-==============================================================================================================================================================
+---------------------------------------------------------------------
 
 ### Deadlocks and solution with lock sequencing
 
@@ -1358,7 +1363,7 @@ Lock sequencing is one possible solution for deadlock avoidance. Adjust the lock
       }
     }
 
-===============================================================================================================
+---------------------------------------------------------------------
 
 ### Reentrant Locks
 
@@ -1479,7 +1484,7 @@ Example is just for demo, hence lock/unlock operations are kept in incr() method
         System.out.println( obj.getX() );	
         }
     }
-================================================================================================================
+---------------------------------------------------------------------
 
 ### Producer and Consumer Problem
 **Thread signalling using wait() and notify() -**
@@ -1613,7 +1618,7 @@ There are different ways of solving it, one approach is to ask the producer to w
 
 * **main()** initiates these operations, by creating the MessageQueue object and passing it to both the producer and consumer threads.
 
-================================================================================================================
+---------------------------------------------------------------------
 
 ### ThreadLocal
 
@@ -1759,7 +1764,7 @@ Summary -
 
 ThreadLocal could be used to supply some vital information to all the components involved in processing the request, where this could not be passed directly. But it considered an anti-pattern and creates trouble during asynchronous processing if not handled properly.
 
-=================================================================================================================
+---------------------------------------------------------------------
 
 ### BlockingQueue and revised producer and consumer problem
 
@@ -1916,7 +1921,7 @@ poll(timeout, timeunit)
     }
 
 
-=================================================================================================================
+---------------------------------------------------------------------
 
 ## PriorityBlockingQueue
 
@@ -1989,7 +1994,7 @@ PriorityBlockingQueue orders the elements through natural order if they are Comp
     name : c, rank : 4
     name : a, rank : 12
 
-=================================================================================================================
+---------------------------------------------------------------------
 
 ## Fork Join Framework
 
@@ -2112,8 +2117,8 @@ result = subTask.invoke();
     }
 
 
-=================================================================================================================
+---------------------------------------------------------------------
 
 
 
-=================================================================================================================
+---------------------------------------------------------------------
