@@ -712,10 +712,11 @@ A combination of M and T but the application ends once the main ends.
 **Callable interface -**
 Unlike Runnable, Callable interface allows us to create an asynchronous task which is capable of returning an Object.
 
-interface Callable<V> {
-V call() throws Exception;
-}
-If you implement Runnable interface we can not return any result. But if you implement Callable interface then you can return the result as well. Like run() method in the Runnable interface, you need to override the call() method. The return type of the call() method should match with the intended return type of the result. Callable<Double> means the call method returns Double value,  Callable<Fruit> means call method returns an instance of type Fruit.
+	Interface Callable<V> {
+		V call() throws Exception;
+	}
+
+If you implement Runnable interface we can not return any result. But if you implement Callable interface then you can return the result as well. Like run() method in the Runnable interface, you need to override the call() method in Callable. The return type of the call() method should match with the intended return type of the result. Callable<Double> means the call method returns Double value,  Callable<Fruit> means call method returns an instance of type Fruit.
 
     class GetStockQuoteTask implements Callable<Double> {
       private String stockSymbol;
@@ -730,6 +731,7 @@ If you implement Runnable interface we can not return any result. But if you imp
         return 0.0;
       }
     }
+    
 To submit this task for execution, you can use the submit method on the ExecutorService.
 
 	String symbol = "ABCD";
