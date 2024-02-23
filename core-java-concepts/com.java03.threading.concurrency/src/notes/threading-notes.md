@@ -40,10 +40,12 @@
       }
 
 When you run the above example you will see 1500 M's first and then followed by 1500 T's.
+
+
 ------------------------------------------------------
 
 
-### True Parallelism vs Logical Parallelism
+## True Parallelism vs Logical Parallelism
 -------------------------------------
 
 * True Parallelism vs Logical Parallelism
