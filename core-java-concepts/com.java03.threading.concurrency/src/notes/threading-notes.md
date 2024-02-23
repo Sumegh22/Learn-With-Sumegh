@@ -732,22 +732,22 @@ If you implement Runnable interface we can not return any result. But if you imp
     }
 To submit this task for execution, you can use the submit method on the ExecutorService.
 
-String symbol = "ABCD";
-GetStockQuoteTask task = new GetStockQuoteTask(symbol);
-Future<Double> future = executor.submit( task );
-Double price = future.get();
+	String symbol = "ABCD";
+	GetStockQuoteTask task = new GetStockQuoteTask(symbol);
+	Future<Double> future = executor.submit( task );
+	Double price = future.get();
 
 
-Future Object -
+## Future Object -
 When you submit a Callable task to the ExecutorService, it returns a Future object. This object enables us to access the request and check for the result of the operation if it is completed.
 
-Important methods -
+**Important methods -**
 
-isDone() - Returns true if the task is done and false otherwise.
+**isDone()** - Returns true if the task is done and false otherwise.
 
-get() - Returns the result if the task is done, otherwise waits till the task is done and then it returns the result.
+**get()** - Returns the result if the task is done, otherwise waits till the task is done and then it returns the result.
 
-cancel(boolean mayInterrupt) - Used to stop the task, stops it immediately if not started, otherwise interrupts the task only if mayInterrupt is true.
+**cancel(boolean mayInterrupt)** - Used to stop the task, stops it immediately if not started, otherwise interrupts the task only if mayInterrupt is true.
 
 
 
