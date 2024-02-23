@@ -469,7 +469,7 @@ sleep() method of the thread class is used to block the thread for the given tim
 **BLOCKED:**
   A thread is blocked if it is waiting for a monitor lock is in this state. Refer synchronized methods and blocks.
 
-*** WAITING:**
+**WAITING:**
   A thread that is waiting indefinitely for another thread to perform a particular action is in this state. Refer wait(), join()
 
 **TIMED_WAITING**
@@ -571,15 +571,18 @@ Example -
 
 **Sample Output -**
 NOTE - OUTPUT MAY VARY WITH JAVA VERSION.
+		
+	System threads..........
+	java.lang.ThreadGroup[name=system,maxpri=10]
+	Thread[Reference Handler,10,system]
+	Thread[Finalizer,8,system]
+	Thread[Signal Dispatcher,9,system]
+	java.lang.ThreadGroup[name=main,maxpri=10]
+	Thread[main,5,main]
 
-System threads..........
-java.lang.ThreadGroup[name=system,maxpri=10]
-Thread[Reference Handler,10,system]
-Thread[Finalizer,8,system]
-Thread[Signal Dispatcher,9,system]
-java.lang.ThreadGroup[name=main,maxpri=10]
-Thread[main,5,main]
-Associating a Thread with ThreadGroup -
+
+
+**- Associating a Thread with ThreadGroup:**
 Straight forward, create an instance of the ThreadGroup and give it a name. You can do group level operations over the ThreadGroup object. To associate a thread with the thread group, pass the thread group reference to the Thread class constructor.
 
 Example -
@@ -619,15 +622,16 @@ Example -
     }
 
 **Sample Output -**
-System threads..........
-java.lang.ThreadGroup[name=system,maxpri=10]
-Thread[Reference Handler,10,system]
-Thread[Finalizer,8,system]
-Thread[Signal Dispatcher,9,system]
-java.lang.ThreadGroup[name=main,maxpri=10]
-Thread[main,5,main]
-java.lang.ThreadGroup[name=MyGroup,maxpri=4]
-Thread[DemoThread,4,MyGroup]
+
+	System threads..........
+	java.lang.ThreadGroup[name=system,maxpri=10]
+	Thread[Reference Handler,10,system]
+	Thread[Finalizer,8,system]
+	Thread[Signal Dispatcher,9,system]
+	java.lang.ThreadGroup[name=main,maxpri=10]
+	Thread[main,5,main]
+	java.lang.ThreadGroup[name=MyGroup,maxpri=4]
+	Thread[DemoThread,4,MyGroup]
 
 **Technical Note -**
 It is important to note that even the main method runs with a thread called the main thread. And its default priority is 5.
