@@ -11,12 +11,14 @@ We can use @Transactional to wrap a method in a database transaction. It allows 
 Spring creates a proxy, or manipulates the class byte-code, to manage the creation, commit, and rollback of the transaction. If we have a method like callMethod and we mark it as @Transactional, Spring will wrap some transaction management code around the invocation@Transactional method called: createTransactionIfNecessary(); 
 
 ```
-	try { addEmployee(); 
-		commitTransactionAfterReturning(); 
-		 } catch (exception) { 
-			 rollbackTransactionAfterThrowing(); 
-			 throw exception; 
-			} 
+	try {
+	     addEmployee(); 
+             commitTransactionAfterReturning(); 
+	     } catch (exception) { 
+		 rollbackTransactionAfterThrowing(); 
+		 throw exception; 
+		}
+
 ```
 
 ## How to use @Transactional ?
