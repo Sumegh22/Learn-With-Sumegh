@@ -31,21 +31,49 @@ Transactions manage the changes that you perform in one or more systems. These c
  ACID is an acronym that stands for 
  - atomicity,  consistency,  isolation, and  durability: 
 
- - Atomicity describes an all or nothing principle. Either all
-   operations performed within the transaction get executed or none of
-   them. That means if you commit the transaction successfully, you can
-   be sure that all operations got performed. It also enables you to
-   abort a transaction and roll back all operations if an error occurs.
+ - **Atomicity** describes an all or nothing principle. Either all operations performed within the transaction get executed or none of them.
+	 - That means if you commit the transaction successfully, you can be sure that all operations got performed.
+	 - It also enables you to abort a transaction and roll back all operations if an error occurs.
    
- - The consistency characteristic ensures that your transaction takes a
-   system from one consistent state to another consistent state. That
-   means that either all operations were rolled back and the data was
-   set back to the state you started with or the changed data passed all
-   consistency checks. In a relational database, that means that the
-   modified data needs to pass all constraint checks, like foreign key
-   or unique constraints, defined in your database. 
+ - **Consistency** characteristic ensures that your transaction takes a system from one consistent state to another consistent state.
+	 - That means that either all operations were rolled back and the data was set back to the state you started with or the changed data passed all
+	   consistency checks. In a relational database, that means that the modified data needs to pass all constraint checks, like foreign key or unique constraints, 	   defined in your database. 
    
-  - Isolation means that changes that you perform within a transaction are not visible to any
+  - **Isolation** means that changes that you perform within a transaction are not visible to any
    other transactions until you commit them successfully .
    
-  - Durability ensures that your committed changes get persisted.
+  - **Durability** ensures that your committed changes get persisted.
+
+## NESTED Propogation -   
+
+- NESTED acts like REQUIRED, only it uses savepoints between nested invocations.
+- For NESTED propagation, Spring checks if a transaction exists, and if so, it marks a save point. This means that if our business logic execution throws an exception, then the transaction rollbacks to this save point. If there's no active transaction, it works like REQUIRED.
+
+## MANDATORY Propagation -   
+- I’m not going to open up a transaction myself, but I’m going to throw exception if no one else opened one up. No New connection will be created by me.
+- If this inner logical transaction is rolled back, then the outer logical transaction is rolled back as well, exactly as with the case of Propagation.REQUIRED.
+
+
+## NEVER Propogation -   
+- I’m going to throw an exception if someone else started up a transaction.
+- The Propagation.NEVER states that no physical transaction should exist.
+- If a physical transaction is found, then NEVER will cause an exception as follows -
+  `org.springframework.transaction.IllegalTransactionStateException: Existing transaction found for transaction marked with propagation 'never'`
+- When you call a method annotated with NEVER, you must ensure that no physical transaction is open.
+- The code inside this method can open physical transactions with no problem.
+- eg: : When the code reaches the save() method, Spring will open a physical transaction especially for running this call.
+- This happens because save() takes advantage of the default Propagation.REQUIRED. JPA Repository methods are by default enclosed in transaction boundaries.
+
+## Propagation.NOT_SUPPORTED -  
+
+- If a current transaction exists, first Spring suspends it, and then the business logic is executed without a transaction:
+- This physical transaction will be automatically resumed at the end. After this transaction is resumed, it can be rolled back (in case of a failure) or committed.
+- If the RuntimeException was thrown in child(), then this exception was propagated in parent(), and this logical transaction is rolled back.
+
+
+## SUPPORTS Propogation -   
+
+ - I don’t really care if a transaction is open or not, i can work either way
+ -  For SUPPORTS, Spring first checks if an active transaction exists.
+ -  If a transaction exists, then the existing transaction will be used.
+ -  If there isn't a transaction, it is executed non-transactional.
