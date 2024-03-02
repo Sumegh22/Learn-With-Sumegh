@@ -223,12 +223,13 @@ Static polymorphism, compile time poly, is when a method is overloaded, meaning 
 
 Dynamic poly, runtime poly, is when a method is overridden. In this case, Same method name, same params but operation is different, and may be different return type.
 Java supports* covariant return types for overridden methods. This means an overridden method may have a more specific return type. That is, as long as the new return type is assignable to the return type of the method you are overriding, it's allowed.
-If you don't have the same or narrower return type then you will get :: error: method() in subclass cannot override method() in superclass
+If you don't have the same or narrower return type then you will get :: 
+- error: method() in subclass cannot override method() in superclass
 
 Final key word, Final methods cannot be overridden, this means, when a final method is called, the compiler will call the byte code of this method, no matter how many time you make a call to it, and since there is no change, it increases execution efficiency and makes execution faster
 
-If you make constuctor of a class as Final, the class cannot be extended (inherited)
-static method cannot be overridden because, static methods are object/instance independent, so there is no point to make any change.
+- If you make constuctor of a class as Final, the class cannot be extended (inherited)
+- static method cannot be overridden because, static methods are object/instance independent, so there is no point to make any change.
 
 Overriding depends on object, Static does not depends on object, Hence STATIC CANNOT BE OVERRIDEEN
 
@@ -241,14 +242,39 @@ Overriding depends on object, Static does not depends on object, Hence STATIC CA
 
 
 Example
+```
+  public class Vehicle( )  {  
+	  private String vehicleName;
+	  private String company;
+	  private Car myCar;
+		
+  	// Autowire dependencies or perform constructor based injection of dependencies.
+	// use setter methods to set values to variables;
+	// use getter methos to fetch values from variables, This way the internal implementation remains hidden
+	// hence Encapsulation is achieved
+  }
+
+public class Car implements PoweredVehicle{
+	private String fuel;
+	private double milegae;
+	
+	@Override
+	public double mileage(String fuel, Engine engineName){
+	 returm mileage;
+	}
+ }
+
+```
 
 -------------------------------------------------------------------------------------------------------------------------------------
 **Abstraction:**
 Giving flexibility to the child classes to implement existing methods based upon use case. Abstract methods do not have a body. Showing only the required information.
 - If a class contains, one or more Abstract method, the class has to be made abstract.
+```
   public abstract class Parent( )  {  
-  abstract void  career(String name);
+  abstract void career(String name);
   }
+```
 
 - abstract classes can have variables, but what could be significance, since the method do not have a body
 - Consider this example, Assume that there is a an abstract class vehicle, which has abstract run () method, which is being overridden in various vehicle as per the design and specification. Now if the govt lays new rules like BS6 vehicle have to keep 2L fuel in reserve, then this property will be directly inherited in each child class automatically. Means, it reduces overhead of child classes to implement variables explicitly if they all have some property in common
