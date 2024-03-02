@@ -151,7 +151,9 @@ Remember that explicitly invoking garbage collection methods (System.gc() or Run
 
 ![image](https://github.com/Sumegh22/Learn-With-Sumegh/assets/84231944/57de1d78-b63e-4ee3-8a38-4d496ad175a5)
 
-### Static : 
+-------------------
+
+## Static : 
 static methods do not need objects of a class to be created. Static vars/ methods are object independent. hence you cannot/ must not use this keywords inside constructor or methods to reference static things, use the class name instead.
 
 ### static block:
@@ -159,19 +161,45 @@ When a class is loaded by the compiler, then static objects /methods are the ver
 Note: Static vars or methods are not object depended, and are called class level entities . You cannot have a non static member inside a static method.
 
 A static block is executed only once.
+```
 static {
 int a = 4;
 }
+```
 
-### SingleTon class:
-When only one object of a class can be created.
-steps to do this
-1. Set the constructor as private
-2. initialize a private object of that class, within itself
-3. create a static method which can be called from other places that will check if an object exist,  will create if not and will then return the only object created for this class.
+* When a variable is declared static in Java programming, it means that the variable belongs to the class itself rather than to any specific instance of the class. This means that there is only one copy of the variable in memory, regardless of how many instances of the class are created.
 
----------------------------------------------
+* Here's an example. Say we have a Department class that has a static variable called numberOfWorker. We declare and increment the static variable at the constructor level to show the value of the static variable whenever the class object is created.
 
+```
+public class Department{
+    public static int numberOfWorker= 0;
+    public String name;
+    
+    public Department(String name) {
+        this.name = name;
+        numberOfWorker++; // increment the static variable every time a new 							//Person is created
+    }
+}
+```
+
+* The results of the above code show that as we create new Department objects, the static variable numberOfWorker retains its value.
+
+* When we print out the value of numberOfWorker in the console, we can see that it retains its value across all instances of the Department class. This is because there is only one copy of the variable in memory, and any changes to the variable will be reflected across all instances of the class.
+
+```
+Department dpt1 = new Department("Admin");
+System.out.println(Department.numberOfWorker); // output: 1
+
+Department dpt2 = new Department ("Finance");
+System.out.println(Department.numberOfWorker); // output: 2
+
+Department dpt3 = new Department ("Software");
+System.out.println(Department.numberOfWorker); // output: 3
+
+```
+
+--------------------------
 
 ## OOPs Pillars
 
@@ -204,7 +232,8 @@ static method cannot be overridden because, static methods are object/instance i
 Overriding depends on object, Static does not depends on object, Hence STATIC CANNOT BE OVERRIDEEN
 
 
---------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------
+
 **Encapsulation:**
 - Wrapping up of implementation of variables, methods and components  in a class. Hiding internal impl of a class and its data members.
 - This is done, so that the child classes or others cannot access it. To do this one has to mark methods and member variables as private and now they become hidden from everyone else except, methods] in same class
@@ -270,6 +299,7 @@ public class Main {
 
 
 ```
+------------------------
 
 **Interface:**
 - An interface is a completely "abstract class" that is used to group related methods with empty bodies.
@@ -349,7 +379,6 @@ The reverse operation of serialization is called deserialization where byte-stre
 
 ---------------------------------------------
 
-
 ## Lambdas, Streams and Functional Programming
 --------------
 
@@ -395,6 +424,15 @@ Exception: when the normal flow of your code/ program meets with an unexpected h
 3. Here Shallow copy is created by default. To make a deep copy, you have to override clone method from object class. 
 
 ----------------------------------------------
+
+### SingleTon class:
+When only one object of a class can be created.
+steps to do this
+1. Set the constructor as private
+2. initialize a private object of that class, within itself
+3. create a static method which can be called from other places that will check if an object exist,  will create if not and will then return the only object created for this class.
+
+---------------------------------------------
 
 
 
