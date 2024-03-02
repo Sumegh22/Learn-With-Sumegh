@@ -246,7 +246,7 @@ Example
   public class Vehicle( )  {  
 	  private String vehicleName;
 	  private String company;
-	  private Car myCar;
+	  private Type vehicleType;
 		
   	// Autowire dependencies or perform constructor based injection of dependencies.
 	// use setter methods to set values to variables;
@@ -254,12 +254,20 @@ Example
 	// hence Encapsulation is achieved
   }
 
-public class Car implements PoweredVehicle{
+public class Car extends Vehicle implements PoweredVehicle{
 	private String fuel;
-	private double milegae;
-	
+	private Engine engine;
+	private double mileage;
+
+public Car(String vehicleName, String company, String vehilceType, String fuel, Engine engine){
+super(vehicleName, company, vehilceType)
+this.fuel = fuel;
+this.engine = engine;
+
+}
+	// Override method from interface
 	@Override
-	public double mileage(String fuel, Engine engineName){
+	public double mileage(String fuel, Engine engine){
 	 returm mileage;
 	}
  }
