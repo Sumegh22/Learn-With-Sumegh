@@ -77,7 +77,7 @@ Student sumegh = new Student( 14, "Sumegh T", 98.09f)  then interanally it would
 ## Garbage collection and finalize:
 GB is an automatic process, managed by JVM. After any operation when a good amount of memory is utilized, the  JVM hits GC method, this first checks for objects that are unreferenced or idle. say the objects that are there in heap mem, but no ref variable is pointing to it, such things will be cleared.
 
-As stated earlier it is automatic process you do not have any control over it, but there could be certain operations or tasks that you would want to execute before your ibject is destroyed, you can put those operations in finalize
+As stated earlier it is automatic process you do not have any control over it, but there could be certain operations or tasks that you would want to execute before your object is destroyed, you can put those operations in finalize
 
 
 ### types of garbage collectors:
@@ -154,7 +154,7 @@ Remember that explicitly invoking garbage collection methods (System.gc() or Run
 -------------------
 
 ## Static : 
-static methods do not need objects of a class to be created. Static vars/ methods are object independent. hence you cannot/ must not use this keywords inside constructor or methods to reference static things, use the class name instead.
+static methods do not need objects of a class to be created. Static vars/ methods are object independent. hence you cannot/ must not use `this` keywords inside constructor or methods to reference static things, use the class name instead.
 
 ### static block:
 When a class is loaded by the compiler, then static objects /methods are the very first thing that are evaluated.
@@ -178,7 +178,8 @@ public class Department{
     
     public Department(String name) {
         this.name = name;
-        numberOfWorker++; // increment the static variable every time a new 							//Person is created
+        numberOfWorker++; // increment the static variable every time a new
+			  //Person is created
     }
 }
 ```
@@ -420,7 +421,7 @@ Exception: when the normal flow of your code/ program meets with an unexpected h
 `    A a = new A(x, y);
      A b = new A (a);`
    a clone named 'b' of object 'a' is created using 'new' and this takes a lot of processing time. All of this can be reduced object clonning
-2. To perform obkect cloning java.lang has a package has an interface called Cloneable
+2. To perform object cloning java.lang has a package has an interface called Cloneable
 3. Here Shallow copy is created by default. To make a deep copy, you have to override clone method from object class. 
 
 ----------------------------------------------
