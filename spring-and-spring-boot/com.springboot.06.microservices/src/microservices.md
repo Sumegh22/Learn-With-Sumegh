@@ -25,10 +25,13 @@ Service Registry
   - Step 1 : Create a project for Service-Registry and Add following spring-dependencies
          - cloud-bootstrap : (spring-cloud-starter) this dependency provides Non-specific spring cloud features
          - Eureka Server : (spring-cloud-starter-netflix-eureka-server) this dependency acts as spring cloud discovery service
-  - Step 2: Go to main class, ( class annotated with @SpringBootApplication) and add one more annotation `@EnableEurekaServer`
+  - Step 2: Go to main class, ( class annotated with @SpringBootApplication) and add one more annotation *@EnableEurekaServer*
   - Step 3: To avoid the service to self-register in the discovery list, we have to exclude our MS used for Service resgistry
          - configure the Application.yaml or configmap.yaml as below. registr-with-eureka as false and Set fetch-registry as false
          - `Note` : The Eureka Server's default port is 8761
+
+  - Step 4: Your service registry must not self register, hence in the application.yaml file add the below mentioned config so that service-registry MS does not register itself    
+    
 ```
 eureka:
   instance:
@@ -39,10 +42,84 @@ eureka:
 server:
   port: 8761
 ```
-- Step 4: Register this new created service as a Client in all your other Microservices
+
+- Step 5: Register this new created service as a Client in all your other Microservices
 ----------------------------------------------------
 
 Service Discovery
 -----------
-- Here we will make use of Spring cloud eurka client
-- refer configs from : https://github.com/Sumegh22/Microservices-Tutorial-Series/blob/main/UserService/UserService/src/main/resources/application.yml
+- Now you need to configure each of your service so that they get discovered by the service-registry
+- Step 1 : Add spring-cloud-netflix-eureka-client dependency in pom.xml
+- Step 2 : Annotate the main class with *@EnableDiscoveryClient*
+```
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+```
+- Step 3 : Add configs in the application.yaml as shown here : [(https://github.com/Sumegh22/animeworld-configs-repo/blob/main/application-dev.yaml)](https://github.com/Sumegh22/animeworld-configs-repo/blob/main/application-dev.yaml)
+- Step 4 : The next time you boot your application it will be registered as available and no matter how many time this service's instace go down and new instance with hostname and port are generated this service can be connected using the name given in service-registry server.
+
+----------------------------------------------------
+
+RestTemplate calls 
+-----------  
+
+- When there is a one to one communication betweeen service, you can use this method to establish communication between them.
+  
+```
+    public List<Rating> getRatingsByUserId(String userId){
+        Rating[] ratingsByThisUser =  restTemplate.getForObject("http://RATING-SERVICE/ratings/users/"+userId, Rating[].class);
+        List<Rating> ratings = Arrays.asList(ratingsByThisUser);
+        List<Rating> allRatingsByUser = ratings.stream().map(rating -> {
+          ResponseEntity<Anime> animeResponseEntity =  restTemplate.getForEntity("http://ANIME-SERVICE/anime/"+rating.getAnimeId(), Anime.class);
+          Anime anime = animeResponseEntity.getBody();
+          rating.setAnime(anime);
+          return rating;
+        }).collect(Collectors.toList()) ;
+        return allRatingsByUser;
+    }
+```
+
+----------------------------------------------------
+
+Feign Client 
+-----------  
+
+-
+-
+-
+-
+
+
+----------------------------------------------------
+
+Error Handling in Rest Calls | @RestControllerAdvice
+----------- 
+
+-
+-
+-
+-
+
+----------------------------------------------------
+
+Externalized configurations using Config-Server App 
+----------- 
+
+-
+-
+-
+-
+
+----------------------------------------------------
+
+Fault Tolerance | Circuit Breaker 
+----------- 
+
+-
+-
+-
+-
+
+----------------------------------------------------
