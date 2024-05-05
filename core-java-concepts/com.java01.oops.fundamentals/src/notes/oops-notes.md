@@ -24,7 +24,7 @@ JDK consists of JRE which has JVM Along with some additional file required by JV
 8. when a class say Demo is public class, then it should be declared in a separate file. meaning any inner class cannot be public class.
 9. Explain PSVM and SOPLn.
 
-Type Casting and Type Conversion
+**Type Casting and Type Conversion**
 Type casting between two datatypes can happen only when following conditions are met
 1. The two types must be compatible
 2. The destination type should be greater than the source type
