@@ -42,7 +42,7 @@ https://github.com/kunal-kushwaha/DSA-Bootcamp-Java/tree/main/lectures/17-oop/no
 - **Instance Variables:** vars defined inside an object, whose scope is limited to that particular obkect only are called instance vars
 - **Ref-variables:** vars named used for objects.
 
-Significance of "new" keyword >When we create any instance of a class, we create an object, this new keyword is used in scenario where we want to create a totally new object. it calls the constructor of class to create objects
+Significance of "new" keyword, When we create any instance of a class, we create an object, this new keyword is used in scenario where we want to create a totally new object. it calls the constructor of class to create objects
 
 Student s = new [constructor of Student Class]
 
@@ -63,6 +63,9 @@ Student s = new [constructor of Student Class]
 
 **this keyword :** In Java this keyword points to the current object under consideration. The object on which any operation is being performed, for example if you are creating an object of a class then, while defining the params of this object, you pass values to constructor at that point, parameterised constructor is called which handles definition of variables and params for current object which is being defined, and all of this is being done using the this keyword
 
+In words the code tells JVM, using the 'new' keyword create an object in Heap memory, whose object name (obj refernce is 'sumegh', as stated before the '=' sign) and
+to the attributes of the 'sumegh' object values as ```rno = 14``` and so on.
+
 ex:
 Student sumegh = new Student( 14, "Sumegh T", 98.09f)  then interanally it would be working as
 
@@ -75,7 +78,26 @@ Student sumegh = new Student( 14, "Sumegh T", 98.09f)  then interanally it would
 ---------------------------------------------
 
 ## Garbage collection and finalize:
+
 GB is an automatic process, managed by JVM. After any operation when a good amount of memory is utilized, the  JVM hits GC method, this first checks for objects that are unreferenced or idle. say the objects that are there in heap mem, but no ref variable is pointing to it, such things will be cleared.
+
+Garbage Collection in Java is a process by which the programs perform automatic memory management. Java programs compile into bytecode that can be run on a Java Virtual Machine (JVM). When Java programs run on the JVM, objects are created on the heap, which is a portion of memory dedicated to the program. Eventually, some objects will no longer be needed. The garbage collector finds these unused objects and deletes them to free up memory.
+
+The garbage collection process involves the following steps:
+
+1. **Marking:** This is the first phase of garbage collection. The garbage collector identifies which pieces of memory are in use and which are not.
+
+2. **Normal Deletion:** In this phase, the garbage collector removes the unused objects and reclaims their memory. The limitation of this approach is that it can leave fragmented memory.
+
+3. **Deletion with Compacting:** To solve the fragmentation problem, the garbage collector can also move the remaining objects to one end of the heap so that the free memory is all in one block.
+
+Java's garbage collector divides the heap into two areas (or generations), based on the observation that most of the objects are quickly becoming unreachable, these are:
+
+1. **Young Generation:** This is where all new objects are allocated and aged. When the young generation fills up, this causes a minor garbage collection. Minor collections can be optimized assuming a high object mortality rate. A young generation full of dead objects is collected very quickly. Some surviving objects are aged and eventually move to the old generation.
+
+2. **Old Generation:** When objects that have survived all minor garbage collections are moved to the old generation. Usually, a major garbage collection is performed in the Old generation space and it takes a longer time as it involves all live objects.
+
+In summary, the purpose of garbage collection is to identify and discard objects that are no longer needed by a program so that their resources can be reclaimed and reused. A Java object is subject to garbage collection when it becomes unreachable to the program in which it is used. The balance between the Young and Old generations can greatly affect the efficiency of garbage collection in terms of speed and impact on application performance.
 
 As stated earlier it is automatic process you do not have any control over it, but there could be certain operations or tasks that you would want to execute before your object is destroyed, you can put those operations in finalize
 
@@ -139,8 +161,30 @@ Using the finalize() method (deprecated as of Java 9) to perform cleanup operati
  
 Remember that explicitly invoking garbage collection methods (System.gc() or Runtime.getRuntime().gc()) doesn't guarantee immediate garbage collection, as the JVM decides when it's appropriate based on its internal algorithms. It's generally better to rely on the automatic garbage collection mechanisms unless there are specific reasons to intervene.
 
+----------------------------------
 
-## 
+# Q. In a performance-focused Java microservice application, handling memory efficiently is crucial. Here are some strategies to boost JVM performance:
+
+1. **Choose the Right Garbage Collector:** Java offers several garbage collectors, each designed with different use cases in mind. For example, if you're working with a large heap and have a lot of spare CPU capacity, the G1 (Garbage First) or Z Garbage Collector could be a good choice. If you're working with a smaller heap and want to minimize pauses, the CMS (Concurrent Mark Sweep) collector might be better.
+
+2. **Tune the JVM Heap Size:** The heap size should be tuned carefully. If it's too small, you'll get frequent garbage collections and possibly OutOfMemoryErrors. If it's too large, you might never get OutOfMemoryErrors, but your garbage collections will take longer because there's more memory to scan. The optimal heap size depends on the number of live objects your application typically has, as well as the total amount of memory available.
+
+3. **Use Appropriate Data Structures:** Using the right data structures can significantly reduce memory usage. For example, instead of using an ArrayList to store a large number of integers, you might use an int array to save memory.
+
+4. **Avoid Memory Leaks:** Memory leaks can occur when objects are stored in collections and then forgotten about. Always ensure that objects are removed from collections when they're no longer needed.
+
+5. **Use String.intern() Wisely:** The String.intern() method can help reduce the amount of memory used by your application by reusing strings that have already been created. However, it can also cause problems if used incorrectly, so use it wisely.
+
+6. **Use Profiling Tools:** Tools like VisualVM, JProfiler, or YourKit can help you understand your application's memory usage and find bottlenecks or memory leaks.
+
+7. **Use Compressed Oops:** Compressed ordinary object pointers (Oops) can reduce memory usage on 64-bit JVMs. This is enabled by default in recent JVMs when the heap size is less than 32GB.
+
+8. **Use Off-Heap Memory:** For very large data sets, consider using off-heap memory. This can reduce garbage collection pauses, but it also makes your application more complex.
+
+Remember, the best way to improve performance is to measure, make one change at a time, and then measure again. Always test your changes under realistic conditions to see how they affect your application's performance.
+
+-----------------------------------
+
 
 **Note:** Hashcode is not an address of object
 
