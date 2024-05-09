@@ -320,6 +320,17 @@ this.engine = engine;
 
 -------------------------------------------------------------------------------------------------------------------------------------
 **Abstraction:**
+
+- Abstraction is a fundamental concept of object-oriented programming that is used to hide the implementation details and show only the essential features of an object. It helps in reducing programming complexity and increasing efficiency.
+
+Abstract Classes can have both Abstract methods (methods without a body) and normal method (non-abstract methods) : Abstraction can be achieved with either abstract classes or interfaces. An abstract class is a restricted class that cannot be used to create objects; to access it, it must be inherited from another class1. An abstract method can only be used in an abstract class, and it does not have a body1. The body is provided by the subclass (inherited from).
+
+Example:
+
+Java
+
+// Abstract class
+
 Giving flexibility to the child classes to implement existing methods based upon use case. Abstract methods do not have a body. Showing only the required information.
 - If a class contains, one or more Abstract method, the class has to be made abstract.
 ```
@@ -327,6 +338,8 @@ Giving flexibility to the child classes to implement existing methods based upon
   abstract void career(String name);
   }
 ```
+
+Why Use Abstraction?: Abstraction is used to achieve security - hide certain details and only show the important details of an object. It also helps in managing the complexity of large systems by separating the design and implementation.
 
 - abstract classes can have variables, but what could be significance, since the method do not have a body
 - Consider this example, Assume that there is a an abstract class vehicle, which has abstract run () method, which is being overridden in various vehicle as per the design and specification. Now if the govt lays new rules like BS6 vehicle have to keep 2L fuel in reserve, then this property will be directly inherited in each child class automatically. Means, it reduces overhead of child classes to implement variables explicitly if they all have some property in common
