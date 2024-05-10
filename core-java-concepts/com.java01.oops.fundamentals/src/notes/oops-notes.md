@@ -250,7 +250,7 @@ System.out.println(Department.numberOfWorker); // output: 3
 
 **Inheritance**
 1. Single Inheritance: when One class is extended by another child class.
-2. Multilevel , when one class B, which extendsba class A is now extended by new child class C.
+2. Multilevel , when one class B, which extends a class A is now extended by new child class C.  ( A is parent of B, B parent of C).
 3. Multiple inheritance not supported in Java, but it can be achieved by using interfaces.
 4. Hierarchial inheritance: When one class is inherited by multiple child classes
 5. Cyclic inheritance: is not supported
@@ -322,7 +322,7 @@ this.engine = engine;
 
 - Abstraction is a fundamental concept of object-oriented programming that is used to hide the implementation details and show only the essential features of an object. It helps in reducing programming complexity and increasing efficiency.
 
-Abstract Classes can have both Abstract methods (methods without a body) and normal method (non-abstract methods) : Abstraction can be achieved with either abstract classes or interfaces. An abstract class is a restricted class that cannot be used to create objects; to access it, it must be inherited from another class1. An abstract method can only be used in an abstract class, and it does not have a body1. The body is provided by the subclass (inherited from).
+Abstract Classes can have both Abstract methods (methods without a body) and normal method (non-abstract methods) : Abstraction can be achieved with either abstract classes or interfaces. An abstract class is a restricted class that cannot be used to create objects; to access it, it must be inherited from (extended by) another class. An abstract method can only be used in an abstract class, and it does not have a body. The body is provided by the subclass (inherited from or say extended by).
 
 Example:
 
@@ -468,7 +468,16 @@ The reverse operation of serialization is called deserialization where byte-stre
 - Let's see the example given below: https://www.javatpoint.com/serialization-in-java
 
 
----------------------------------------------
+## Object Clonning
+--------------------------------------------
+1. When we try to create one object from another using new keyword like as shown below
+`    A a = new A(x, y);
+     A b = new A (a);`
+   a clone named 'b' of object 'a' is created using 'new' and this takes a lot of processing time. All of this can be reduced object clonning
+2. To perform object cloning java.lang has a package has an interface called Cloneable
+3. Here Shallow copy is created by default. To make a deep copy, you have to override clone method from object class. 
+
+----------------------------------------------
 
 ## Lambdas, Streams and Functional Programming
 --------------
@@ -505,17 +514,6 @@ Exception: when the normal flow of your code/ program meets with an unexpected h
 
   -----------------------------------------------------------
 
-## Object Clonning
---------------------------------------------
-1. When we try to create one object from another using new keyword like as shown below
-`    A a = new A(x, y);
-     A b = new A (a);`
-   a clone named 'b' of object 'a' is created using 'new' and this takes a lot of processing time. All of this can be reduced object clonning
-2. To perform object cloning java.lang has a package has an interface called Cloneable
-3. Here Shallow copy is created by default. To make a deep copy, you have to override clone method from object class. 
-
-----------------------------------------------
-
 ### SingleTon class:
 When only one object of a class can be created.
 steps to do this
@@ -524,8 +522,6 @@ steps to do this
 3. create a static method which can be called from other places that will check if an object exist,  will create if not and will then return the only object created for this class.
 
 ---------------------------------------------
-
-
 
 **How to make a class immutable in Java**
 -----------------------------------------------
