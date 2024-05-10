@@ -265,10 +265,9 @@ System.out.println(Department.numberOfWorker); // output: 3
 Meaning many ways to represent.
 Static polymorphism, compile time poly, is when a method is overloaded, meaning when the params of a method are different. or at least order of params is different. method name should be same here.
 
-Dynamic poly, runtime poly, is when a method is overridden. In this case, Same method name, same params but operation is different, and may be different return type.
-Java supports* covariant return types for overridden methods. This means an overridden method may have a more specific return type. That is, as long as the new return type is assignable to the return type of the method you are overriding, it's allowed.
-If you don't have the same or narrower return type then you will get :: 
-- error: method() in subclass cannot override method() in superclass
+Dynamic poly, runtime poly, is when a method is overridden. In this case, Same method name, same params but operation is different, and may be different (co-variant) return type.
+Java supports* covariant return types for overridden methods. This means an overridden method may have a more specific return type as compared to method in parent class. That is, as long as the new return type is assignable to the return type of the method you are overriding, it's allowed.
+If you don't have the same or narrower return type then you will get :- error: method() in subclass cannot override method() in superclass
 
 Final key word, Final methods cannot be overridden, this means, when a final method is called, the compiler will call the byte code of this method, no matter how many time you make a call to it, and since there is no change, it increases execution efficiency and makes execution faster
 
