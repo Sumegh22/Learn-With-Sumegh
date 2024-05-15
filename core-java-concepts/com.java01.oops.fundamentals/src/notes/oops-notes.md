@@ -51,7 +51,7 @@ Student s = new [constructor of Student Class]
 * real-Life ex: If a teacher (Jvm) wants to provide notes (object) to student for homework (assume homework as a method here). If this student who got notes changes/ manipulates or say destroy notes, then other students have nothing.
 * Teacher Providing notes, can be considered as providing actual memory location of the object, thus if the manipulation is done here the actual object will be changed.
 
-**explanation:** When you use any method and pass a variable as input to it, a copy of the value of that variable is taken into consideration and operations aare performed on this given value, once the method execution is completed if you compare the variable passed and value of the output there may or may not be difference based upon method body, but one thing worth noticing is the memory address of both the vars that we are talking about would be different. this proves java is pass by value and not reference
+**explanation:** When you use any method and pass a variable as input to it, a copy of the value of that variable is taken into consideration and operations are performed on this given value, once the method execution is completed if you compare the variable passed and value of the output there may or may not be difference based upon method body, but one thing worth noticing is the memory address of both the vars that we are talking about would be different. this proves java is pass by value and not reference
 
 **IMPORTANT:**
 ## What happens when you pass object references to a method?..
@@ -101,20 +101,6 @@ In summary, the purpose of garbage collection is to identify and discard objects
 
 As stated earlier it is automatic process you do not have any control over it, but there could be certain operations or tasks that you would want to execute before your object is destroyed, you can put those operations in finalize
 
-
-### types of garbage collectors:
-
-**Serial Garbage Collector:** Suitable for small applications with low memory requirements.
-
-**Parallel Garbage Collector:** Also known as the throughput collector, it uses multiple threads to improve garbage collection performance for medium to large-sized applications.
-
-**Concurrent Mark-Sweep (CMS) Garbage Collector:** Designed for applications where low latency is crucial, it minimizes pauses by running most of its tasks concurrently with the application threads.
-
-**Garbage-First (G1) Garbage Collector:** Introduced in Java 7, it is a server-style garbage collector that aims to provide both low pause times and high throughput by dividing the heap into regions.
-
-Each garbage collector has its strengths and is suited for specific use cases, allowing developers to choose the one that best fits the application's requirements.
-
-
 ### Ways to garbage collect an object in Java
 
 In Java, objects are automatically garbage collected by the Java Virtual Machine (JVM) when they are no longer reachable. However, developers can influence or expedite garbage collection in several ways:
@@ -158,6 +144,31 @@ Using the finalize() method (deprecated as of Java 9) to perform cleanup operati
 	    // Cleanup operations
 	    super.finalize();
 	}
+
+### types of garbage collectors:
+
+**Serial Garbage Collector:** Suitable for small applications with low memory requirements.
+
+**Parallel Garbage Collector:** Also known as the throughput collector, it uses multiple threads to improve garbage collection performance for medium to large-sized applications.
+
+**Concurrent Mark-Sweep (CMS) Garbage Collector:** 
+- Designed for applications where low latency is crucial, it minimizes pauses by running most of its tasks concurrently with the application threads. 
+- The Concurrent Mark Sweep (CMS) collector (also referred to as the concurrent low pause collector) collects the tenured generation. It attempts to minimize the pauses due to garbage collection by doing most of the garbage collection work concurrently with the application threads. Normally the concurrent low pause collector does not copy or compact the live objects. A garbage collection is done without moving the live objects. If fragmentation becomes a problem, allocate a larger heap.
+
+**Garbage-First (G1) Garbage Collector:** 
+- The Garbage-First (G1) collector is a server-style garbage collector, targeted for multi-processor machines with large memories. It meets garbage collection (GC) pause time goals with a high probability, while achieving high throughput. The G1 garbage collector is fully supported in Oracle JDK 7 update 4 and later releases.
+
+**The G1 collector is designed for applications that:**
+- Can operate concurrently with applications threads like the CMS collector.
+- Compact free space without lengthy GC induced pause times.
+- Need more predictable GC pause durations.
+- Do not want to sacrifice a lot of throughput performance.
+- Do not require a much larger Java heap.
+- G1 is planned as the long term replacement for the Concurrent Mark-Sweep Collector (CMS). Comparing G1 with CMS, there are differences that make G1 a better solution. One difference is that G1 is a compacting collector. G1 compacts sufficiently to completely avoid the use of fine-grained free lists for allocation, and instead relies on regions. This considerably simplifies parts of the collector, and mostly eliminates potential fragmentation issues. Also, G1 offers more predictable garbage collection pauses than the CMS collector, and allows users to specify desired pause targets.
+
+
+
+Each garbage collector has its strengths and is suited for specific use cases, allowing developers to choose the one that best fits the application's requirements.
  
 Remember that explicitly invoking garbage collection methods (System.gc() or Runtime.getRuntime().gc()) doesn't guarantee immediate garbage collection, as the JVM decides when it's appropriate based on its internal algorithms. It's generally better to rely on the automatic garbage collection mechanisms unless there are specific reasons to intervene.
 
@@ -185,8 +196,49 @@ Remember, the best way to improve performance is to measure, make one change at 
 
 -----------------------------------
 
+# PermGen vs MetaSpace
 
-**Note:** Hashcode is not an address of object
+- It’s important to keep in mind that, starting with Java 8, the Metaspace replaces the PermGen – bringing some substantial changes.
+
+###  PermGen
+- The JVM keeps track of loaded class metadata in the PermGen. Additionally, the JVM stores all the static content in this memory section. This includes all the static methods, primitive variables, and references to the static objects.
+- Furthermore, it contains data about bytecode, names, and JIT information. Before Java 7, the String Pool was also part of this memory. The disadvantages of the fixed pool size are listed in our write-up.
+- The default maximum memory size for 32-bit JVM is 64 MB and 82 MB for the 64-bit version.
+
+- However, we can change the default size with the JVM options:
+  - -XX:PermSize=[size] is the initial or minimum size of the PermGen space
+  - -XX:MaxPermSize=[size] is the maximum size
+ 
+Most importantly, Oracle completely removed this memory space in the JDK 8 release. Therefore, if we use these tuning flags in Java 8 and newer versions, we’ll get the following warnings:
+
+```
+	>> java -XX:PermSize=100m -XX:MaxPermSize=200m -version
+	OpenJDK 64-Bit Server VM warning: Ignoring option PermSize; support was removed in 8.0
+	OpenJDK 64-Bit Server VM warning: Ignoring option MaxPermSize; support was removed in 8.0
+	...
+```
+- With its limited memory size, PermGen is involved in generating the famous OutOfMemoryError. Simply put, the class loaders weren’t garbage collected properly and, as a result, generated a memory leak.
+- Therefore, we receive a memory space error; this happens mostly in the development environment while creating new class loaders.
+
+### Metaspace
+
+- Simply put, Metaspace is a new memory space – starting from the Java 8 version; it has replaced the older PermGen memory space. The most significant difference is how it handles memory allocation.
+- Specifically, this native memory region grows automatically by default.
+
+We also have new flags to tune the memory:
+- MetaspaceSize and MaxMetaspaceSize – we can set the Metaspace upper bounds.
+- MinMetaspaceFreeRatio – is the minimum percentage of class metadata capacity free after garbage collection
+- MaxMetaspaceFreeRatio – is the maximum percentage of class metadata capacity free after a garbage collection to avoid a reduction in the amount of space
+- Additionally, the garbage collection process also gains some benefits from this change. The garbage collector now automatically triggers the cleaning of the dead - - classes once the class metadata usage reaches its maximum metaspace size.
+- Therefore, with this improvement, JVM reduces the chance to get the OutOfMemory error.
+
+Despite all of these improvements, we still need to monitor and tune the metaspace to avoid memory leaks.
+
+### Summary
+In this quick write-up, we presented a brief description of PermGen and Metaspace memory regions. Additionally, we explained the key differences between each of them.
+PermGen is still around with JDK 7 and older versions, but Metaspace offers more flexible and reliable memory usage for our applications.
+
+-----------------------------------
 
 ## Access mods:
 * public
@@ -416,6 +468,9 @@ Can I implement a Java interface method as private or protected?
 - Constructors cannot be overridden.
 - Classic examples of interface is Serializable, Comparable, Comparator
 
+---------------------------
+
+
 ## comparable vs comparator :
 -------------------------
 https://www.javatpoint.com/difference-between-comparable-and-comparator
@@ -451,6 +506,11 @@ When to Use Which:
 1. Use Comparable when you want to define the default natural ordering of objects in a class. For example, if there is a clear, intrinsic way to order objects (like sorting integers or strings), implement Comparable.
 2. Use Comparator when you want to provide multiple sorting strategies for a class or when you want to sort objects based on criteria that are not intrinsic to the class. This allows you to sort objects in different ways without modifying the class itself.
 3. In summary, if you control the class and want to define the default way of sorting its objects, implement Comparable. If you want to provide different ways to sort objects of a class without modifying the class itself, use Comparator.
+
+-------------------------------------------------------
+# HashCode and Equals contract
+
+**Note:** Hashcode is not an address of object
 
 -------------------------------------------------------
 
