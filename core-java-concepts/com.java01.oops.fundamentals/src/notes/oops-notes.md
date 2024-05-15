@@ -577,7 +577,7 @@ Exception: when the normal flow of your code/ program meets with an unexpected h
 
 However, there's a crucial restriction:
 
-- The overridden method can only throw unchecked exceptions (runtime exceptions and errors). It cannot throw checked exceptions (exceptions derived from Exception except RuntimeException and its subclasses).
+- The overridden method can **only throw unchecked exceptions** (runtime exceptions and errors). It cannot throw checked exceptions (exceptions derived from Exception class.  except for RuntimeException and its subclasses).
 Reasoning:
 
 - Checked exceptions force the calling code to explicitly handle them using try-catch blocks or declare them in the throws clause of the calling method. This ensures that the caller is aware of potential exceptions and takes appropriate actions.
