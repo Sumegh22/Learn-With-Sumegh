@@ -571,7 +571,48 @@ Exception: when the normal flow of your code/ program meets with an unexpected h
 
   ![img_2.png](../oops-images/img_2.png)
 
-  -----------------------------------------------------------
+
+###  If a method in parent class does not throw any Checked exception, then is it possible to throw any exceptions from the overriden version of this method in child class ?
+  Yes, it is possible for an overridden method in a child class to throw a checked exception, even if the parent class method doesn't declare any exceptions in its throws clause.
+
+However, there's a crucial restriction:
+
+- The overridden method can only throw unchecked exceptions (runtime exceptions and errors). It cannot throw checked exceptions (exceptions derived from Exception except RuntimeException and its subclasses).
+Reasoning:
+
+- Checked exceptions force the calling code to explicitly handle them using try-catch blocks or declare them in the throws clause of the calling method. This ensures that the caller is aware of potential exceptions and takes appropriate actions.
+- By not declaring any exceptions in its throws clause, the parent class method implies that it doesn't throw any checked exceptions under normal circumstances. Allowing the child class to introduce new checked exceptions would violate this contract and potentially break existing code that relies on the parent class method not throwing checked exceptions.
+
+Example:
+
+```
+class ParentClass {
+    public void someMethod() {
+        // ... method implementation (doesn't throw any exceptions)
+    }
+}
+
+class ChildClass extends ParentClass {
+    @Override
+    public void someMethod() throws NullPointerException { // Child throws unchecked exception (NullPointerException)
+        // ... method implementation (might throw NullPointerException)
+    }
+}
+
+```
+In this case:
+
+- ParentClass.someMethod() doesn't declare any exceptions in its throws clause.
+- ChildClass.someMethod() overrides it and throws `NullPointerException`, which is an unchecked exception (a subclass of RuntimeException). This is allowed because unchecked exceptions don't require explicit handling in the throws clause of the calling method.
+Key Points:
+
+- If the parent class method doesn't throw checked exceptions, the overriding child class can only throw unchecked exceptions.
+This restriction maintains exception handling contracts and avoids unexpected behavior in calling code.
+Recommendation:
+
+- If the child class method has the potential to throw a checked exception, consider refactoring the parent class method to declare that checked exception in its throws clause. This provides better code clarity and predictability for callers of both the parent and child methods
+
+-----------------------------------------------------------
 
 ### SingleTon class:
 When only one object of a class can be created.
