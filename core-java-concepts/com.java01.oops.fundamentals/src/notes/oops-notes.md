@@ -178,7 +178,7 @@ Remember that explicitly invoking garbage collection methods (System.gc() or Run
 
 1. **Choose the Right Garbage Collector:** Java offers several garbage collectors, each designed with different use cases in mind. For example, if you're working with a large heap and have a lot of spare CPU capacity, the G1 (Garbage First) or Z Garbage Collector could be a good choice. If you're working with a smaller heap and want to minimize pauses, the CMS (Concurrent Mark Sweep) collector might be better.
 
-2. **Tune the JVM Heap Size:** The heap size should be tuned carefully. If it's too small, you'll get frequent garbage collections and possibly OutOfMemoryErrors. If it's too large, you might never get OutOfMemoryErrors, but your garbage collections will take longer because there's more memory to scan. The optimal heap size depends on the number of live objects your application typically has, as well as the total amount of memory available.
+2. **Tune the JVM Heap Size:** The heap size should be tuned carefully. If it's too small, you'll get frequent garbage collections and possibly OutOfMemoryErrors. If it's too large, you might **Never** get OutOfMemoryErrors, but your garbage collections will take longer because there's more memory to scan. The optimal heap size depends on the number of live objects your application typically has, as well as the total amount of memory available.
 
 3. **Use Appropriate Data Structures:** Using the right data structures can significantly reduce memory usage. For example, instead of using an ArrayList to store a large number of integers, you might use an int array to save memory.
 
@@ -202,7 +202,7 @@ Remember, the best way to improve performance is to measure, make one change at 
 
 ###  PermGen
 - The JVM keeps track of loaded class metadata in the PermGen. Additionally, the JVM stores all the static content in this memory section. This includes all the static methods, primitive variables, and references to the static objects.
-- Furthermore, it contains data about bytecode, names, and JIT information. Before Java 7, the String Pool was also part of this memory. The disadvantages of the fixed pool size are listed in our write-up.
+- Furthermore, it contains data about bytecode, names, and JIT information. Before Java 7, the String Pool was also part of this memory. The disadvantages of the fixed pool size are listed below.
 - The default maximum memory size for 32-bit JVM is 64 MB and 82 MB for the 64-bit version.
 
 - However, we can change the default size with the JVM options:
@@ -229,13 +229,12 @@ We also have new flags to tune the memory:
 - MetaspaceSize and MaxMetaspaceSize – we can set the Metaspace upper bounds.
 - MinMetaspaceFreeRatio – is the minimum percentage of class metadata capacity free after garbage collection
 - MaxMetaspaceFreeRatio – is the maximum percentage of class metadata capacity free after a garbage collection to avoid a reduction in the amount of space
-- Additionally, the garbage collection process also gains some benefits from this change. The garbage collector now automatically triggers the cleaning of the dead - - classes once the class metadata usage reaches its maximum metaspace size.
+- Additionally, the garbage collection process also gains some benefits from this change. The garbage collector now automatically triggers the cleaning of the dead classes, once the class metadata usage reaches its maximum metaspace size.
 - Therefore, with this improvement, JVM reduces the chance to get the OutOfMemory error.
 
 Despite all of these improvements, we still need to monitor and tune the metaspace to avoid memory leaks.
 
-### Summary
-In this quick write-up, we presented a brief description of PermGen and Metaspace memory regions. Additionally, we explained the key differences between each of them.
+### Note
 PermGen is still around with JDK 7 and older versions, but Metaspace offers more flexible and reliable memory usage for our applications.
 
 -----------------------------------
@@ -327,7 +326,6 @@ Final key word, Final methods cannot be overridden, this means, when a final met
 - static method cannot be overridden because, static methods are object/instance independent, so there is no point to make any change.
 
 Overriding depends on object, Static does not depends on object, Hence STATIC CANNOT BE OVERRIDEEN
-
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -509,6 +507,8 @@ When to Use Which:
 
 -------------------------------------------------------
 # HashCode and Equals contract
+
+Read it here : https://www.baeldung.com/java-equals-hashcode-contracts
 
 **Note:** Hashcode is not an address of object
 
