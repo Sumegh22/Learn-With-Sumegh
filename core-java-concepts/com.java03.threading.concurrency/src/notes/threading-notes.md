@@ -119,23 +119,17 @@ You can create a thread and execute the tasks with in the application, this enab
 There are two approaches,
 
 1) Extending the Thread class and performing the task. This is not a preferred approach because you are not extending the Thread functionality, instead you are using the Thread to execute a task, hence you should prefer the second approach.
--	    // Because MyThread extends the Thread
--            // class, you can call the start() method
--            // directly, as it is also a member of this
--            // class, courtesy inheritance relation.
+- // Because MyThread extends the Thread class, you can call the start() method directly, as it is also a member of this class, courtesy inheritance relation.
 
-3) Implementing the Runnable interface and then submitting this task for execution. Similarly there is a Callable interface(explained later) as well.
+2) Implementing the Runnable interface and then submitting this task for execution. Similarly there is a Callable interface(explained later) as well.
 
 
 
-run() method -
-
+- run() method :
 Once you choose your approach, you can consider the run() method as the entry point for thread execution. To simplify just think like main() for a program, run() for a thread.
 
-- start() method -
-
+- start() method:
 Execution of the thread should be initiated using the start() method of the Thread class. This submits the thread for execution. This takes the associated thread to ready state, this doesn't mean it is started immediately. i.e. in simple terms, when you call the start() method, it marks the thread as ready for execution and waits for the CPU turn.
-
 
 
 **1. Extending the Thread class.**
