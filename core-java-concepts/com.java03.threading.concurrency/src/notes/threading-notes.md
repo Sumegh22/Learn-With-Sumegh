@@ -119,8 +119,12 @@ You can create a thread and execute the tasks with in the application, this enab
 There are two approaches,
 
 1) Extending the Thread class and performing the task. This is not a preferred approach because you are not extending the Thread functionality, instead you are using the Thread to execute a task, hence you should prefer the second approach.
+-	    // Because MyThread extends the Thread
+-            // class, you can call the start() method
+-            // directly, as it is also a member of this
+-            // class, courtesy inheritance relation.
 
-2) Implementing the Runnable interface and then submitting this task for execution. Similarly there is a Callable interface(explained later) as well.
+3) Implementing the Runnable interface and then submitting this task for execution. Similarly there is a Callable interface(explained later) as well.
 
 
 
@@ -128,7 +132,7 @@ run() method -
 
 Once you choose your approach, you can consider the run() method as the entry point for thread execution. To simplify just think like main() for a program, run() for a thread.
 
-start() method -
+- start() method -
 
 Execution of the thread should be initiated using the start() method of the Thread class. This submits the thread for execution. This takes the associated thread to ready state, this doesn't mean it is started immediately. i.e. in simple terms, when you call the start() method, it marks the thread as ready for execution and waits for the CPU turn.
 
@@ -157,6 +161,14 @@ Execution of the thread should be initiated using the start() method of the Thre
 // interface should define the abstract method
 // of the interface, otherwise it becomes abstract.
 
+// MyTask is a Runnable task and not a 
+// Thread and hence we need to create a 
+// Thread object and assign it the task 
+// Note here we are calling the start 
+// method over Thread object and not on 
+// task object.
+
+```
     class MyTask implements Runnable {          
                                                       // Thread execution begins here.
           @Override
@@ -178,6 +190,7 @@ Execution of the thread should be initiated using the start() method of the Thre
             // class, you can call the start() method
             // directly, as it is also a member of this
             // class, courtesy inheritance relation.
+
             MyThread thr = new MyThread();
             thr.start();
                 
@@ -197,6 +210,7 @@ Execution of the thread should be initiated using the start() method of the Thre
                     }	
         }
     }
+```
 
 There are three threads in the above program (system threads ignored). One the Main thread that prints "M" and thr that prints "T" and thr2 that prints "-". Because they are executed in parallel, you will see the output like MMMTTT---MMMTTT--- ...
 
