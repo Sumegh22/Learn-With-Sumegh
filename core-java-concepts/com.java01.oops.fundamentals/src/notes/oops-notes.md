@@ -530,21 +530,24 @@ The reverse operation of serialization is called deserialization where byte-stre
 ## Object Clonning
 --------------------------------------------
 1. When we try to create one object from another using new keyword like as shown below
-`    A a = new A(x, y);
-     A b = new A (a);`
-   a clone named 'b' of object 'a' is created using 'new' and this takes a lot of processing time. All of this can be reduced object clonning
-2. To perform object cloning java.lang has a package has an interface called Cloneable
-3. Here Shallow copy is created by default. To make a deep copy, you have to override clone method from object class. 
+```
+      A a = new A(x, y);
+      A b = new A (a);
+```   
+a clone named 'b' of object 'a' is created using 'new' and this takes a lot of processing time. All of 
+this can be reduced object clonning
+3. To perform object cloning java.lang has a package has an interface called Cloneable
+4. Here Shallow copy is created by default. To make a deep copy, you have to override clone method from object class. 
 
 ----------------------------------------------
 
 ## Lambdas, Streams and Functional Programming
 --------------
 
-Lambda functions are oneline functions (short hand functions). Kind of abstract methods that are overridden in your main code. 
-Lambdas can be performed using Functional interfaces. 
-Functional Interfaces are those that have only Single Abstract Method (SAM) present in them, besides they can have many default and static methods
-Default methods are introduced to support backward compatibility. 
+1. Lambda functions are oneline functions (short hand functions). Kind of abstract methods that are overridden in your main code. 
+2. Lambdas can be performed using Functional interfaces. 
+3. Functional Interfaces are those that have only Single Abstract Method (SAM) present in them, besides they can have many default and static methods
+4. Default methods are introduced to support backward compatibility. 
 
   ![img.png](../oops-images/img.png)
 
@@ -563,8 +566,10 @@ Exception: when the normal flow of your code/ program meets with an unexpected h
 2. To throw an exception explicitly through a method, you have to mention in the method signature that the method throws Exception.
 3. Or you can call the throw wild card to throw an exception if a certain scenario is met. 
 
-  `static void doSomething(int a, int b) throws ArithemeticException {
-  }`
+```
+static void doSomething(int a, int b) throws ArithemeticException {
+  }
+```
 
 4. To handle this make use of a try-catch block, try block tries to execute a particular operatn and if any error is encountered then it is
    addressed in the catch block. the code written in finally block would execute no matter what. We can put closure of resource, in finally block. 
@@ -572,12 +577,22 @@ Exception: when the normal flow of your code/ program meets with an unexpected h
   ![img_2.png](../oops-images/img_2.png)
 
 
+| Type | Unchecked exception    | Checked Exceptions         |   |   |
+|------|------------------------|----------------------------|---|---|
+| List | NullPointerException   | ClassNotFoundException     |   |   |
+|      | ClassCastException     | SocketException            |   |   |
+|      | ArithmeticException    | SQLException               |   |   |
+|      | DateTimeException      | IOException      	     |   |   |
+|      | ArrayStoreException    | FileNotFoundException      |   |   |
+
+----------------------------------
+
 ###  If a method in parent class does not throw any Checked exception, then is it possible to throw any exceptions from the overriden version of this method in child class ?
-  Yes, it is possible for an overridden method in a child class to throw a checked exception, even if the parent class method doesn't declare any exceptions in its throws clause.
+  Yes, it is possible for an overridden method in a child class to throw exceptions, even if the parent class method doesn't declare any exceptions in its throws clause.
 
-However, there's a crucial restriction:
+However, there's a **crucial restriction:**
 
-- The overridden method can **only throw unchecked exceptions** (runtime exceptions and errors). It cannot throw checked exceptions (exceptions derived from Exception class.  except for RuntimeException and its subclasses).
+- The overridden method can **only throw unchecked exceptions** (runtime exceptions and errors). It cannot throw checked exceptions (exceptions derived from Exception class.  but can throw RuntimeException or exceptions derived from RuntimeException class ex: NullPointer, Arithematic its subclasses).
 Reasoning:
 
 - Checked exceptions force the calling code to explicitly handle them using try-catch blocks or declare them in the throws clause of the calling method. This ensures that the caller is aware of potential exceptions and takes appropriate actions.
