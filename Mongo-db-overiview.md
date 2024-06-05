@@ -17,4 +17,17 @@
 7. If a primary becomes unavailable, The remaining secondary nodes go into election to choose one secondary node to replace the primary, In this election, more than 50% if the nodes must vote for a particular secondary node so that it becomes the primary
 8. This way one of the secondary nodes becomes primary by auto balancing, This is how high availability is achived in MongoDb
 9. It is worth noticing that if your replica set has only two nodes 1 primary and 1 secondary in this case if the primary goes down the secondary will not become primary
+    
+## MongoShell
+
+
+## SetUp
+1. Create replicasets using config files.
+2. config = {_id = "your_rs_name", members[{Array of},{members/ instances},{ in replica set}]
+3. rs.initiate(config) here argument is name of the config file you created
+4. Note : use passwordPromt() method while using mongoshell (mongosh) so that your password is not made vsisible, rather you get a prompt to type password after submitting a command.
+5. rs,getSiblingDB("name-of-database").auth("username") provide password when prompted
+6. rs.status() -> returns the status of your replicaset
+7. It will contain list of all the members in current replicaset
+8. db.serverStatus()['repl']
    
