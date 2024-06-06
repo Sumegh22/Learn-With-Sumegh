@@ -43,4 +43,9 @@
 5. While writing you can specify the writeConcerns to the mongoDb.
 6. Write Concerns could be 1 or majority, If you need your change, to persist and get replicated to majority nodes in the replica set only after which the confirmation will be sent to the client then in such case the w (writeConcern) has to be set to majority.
 7. This way the writing mechanism would take a little longer but the durability is maintained.
-   
+8. findOne({params to search}) | find(), with find method you need to configure the readConsistency
+9. Comparision operators
+   ![image](https://github.com/Sumegh22/Learn-With-Sumegh/assets/84231944/29d01f9e-c7c2-451c-96fb-00d8e1766167)
+10. sort(), skip(). limit
+11. updateOne, updateMany() methods
+12. 
