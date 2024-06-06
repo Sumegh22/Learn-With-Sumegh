@@ -30,4 +30,15 @@
 6. rs.status() -> returns the status of your replicaset
 7. It will contain list of all the members in current replicaset
 8. db.serverStatus()['repl']
+
+## Debug   
+1. To check the op logs -> db.oplog.rs
+2. db.getLogComponents() to check log levels and modify
+
+## CRUD
+1. use db test -> will automatically create test db if it does not exists.
+2. Inside Mongo Db there are dbs or say Schemas and inside schemas we have collections ( like tables)
+3. MQL or MongoDb Query Language is used to perform the CRUD operations, it is also known as MongoDB Query Api
+4. 
+5. 
    
