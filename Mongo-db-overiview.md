@@ -39,6 +39,8 @@
 1. use db test -> will automatically create test db if it does not exists.
 2. Inside Mongo Db there are dbs or say Schemas and inside schemas we have collections ( like tables)
 3. MQL or MongoDb Query Language is used to perform the CRUD operations, it is also known as MongoDB Query Api
-4. 
-5. 
+4. insertOne and insertMany() methods are used to insert documents in mongodb
+5. While writing you can specify the writeConcerns to the mongoDb.
+6. Write Concerns could be 1 or majority, If you need your change, to persist and get replicated to majority nodes in the replica set only after which the confirmation will be sent to the client then in such case the w (writeConcern) has to be set to majority.
+7. This way the writing mechanism would take a little longer but the durability is maintained.
    
