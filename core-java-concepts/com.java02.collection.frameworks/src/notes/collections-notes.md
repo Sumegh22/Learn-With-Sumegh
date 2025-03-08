@@ -157,6 +157,7 @@ Generics allow us to provide the type of Object that a collection can contain, s
 
 WeakHashMap is a Hash table-based implementation of the Map interface with weak keys. An entry in a WeakHashMap will automatically be removed when its key is no longer in ordinary use. Both null values and the null key are supported. This class has performance characteristics similar to those of the HashMap class and has the same efficiency parameters of initial capacity and load factor.
 
+
 **Example:**
 
 ```java
@@ -2175,4 +2176,48 @@ new instance of Employee will be inserted to HashMap
 </div>
 
 
+## Q. How does a HashMap work internally ?
 
+* A HashMap stores data as key-value pairs. Where Each Key is unique For example:
+```aiexclude
+Key: "Name", Value: "Alice"
+Key: "Age", Value: 25
+Key: "City", Value: "New York"
+```
+*
+How Does a HashMap Work Internally in Java?
+A HashMap is one of the most commonly used data structures in Java for storing key-value pairs. It provides efficient operations for insertion, deletion, and retrieval. Here’s a step-by-step explanation of how a HashMap works internally, illustrated with diagrams.
+
+1. Key-Value Pair Storage
+   A HashMap stores data as key-value pairs. For example:
+
+java
+
+
+Key: "Name", Value: "Alice"
+Key: "Age", Value: 25
+Key: "City", Value: "New York"
+Each key is unique, and the value can be accessed using the key.
+
+2. Hashing Mechanism When a key is added to the HashMap, a hash function is applied to the key to generate a hash code.
+3. This hash code determines the index in the underlying array (called a bucket) where the key-value pair will be stored.
+4. The HashMap uses an array to store key-value pairs. Each index in the array is called a bucket. The hash code determines which bucket the key-value pair will be stored in.
+```aiexclude
+Keys: ["Name", "Age", "City"]
+Hash Codes: [12345, 67890, 54321]
+Array Indexes: [5, 0, 1] (based on hash_code % array_size)
+
+Underlying Array:
+Index 0: [Age -> 25]
+Index 1: [City -> New York]
+Index 5: [Name -> Alice]
+```
+5. Sometimes, two keys may generate the same hash code or map to the same index in the array. This is called a collision. To handle collisions, HashMap uses chaining (linked lists) or tree structures (since Java 8).
+6. Collision Resolution: Chaining In chaining, each bucket stores a linked list of key-value pairs. If multiple keys map to the same index, they are stored in the linked list at that index.
+
+7. To retrieve a value:
+   *  Apply the hash function to the key.
+   * Find the corresponding bucket using the hash code.
+   * Search the bucket (or linked list/tree structure, in case of collisions) for the key.
+8. Tree Structure for Collisions (Java 8+)
+   Starting from Java 8, if the number of collisions in a bucket exceeds a certain threshold (default: 8), the linked list is replaced with a balanced tree structure (Red-Black Tree). This improves retrieval time from O(n) (linked list traversal) to O(log n).

@@ -105,3 +105,31 @@ Both methods add all arguments
 ## How equals and hashcode contract works in java ?
 * The default implementation is not enough to satisfy business needs, especially if we're talking about a huge application that considers two objects as equal when some business fact happens. In some business scenarios, developers provide their own implementation in order to force their own equality mechanism regardless the memory addresses.
 * As per the Java documentation in perspective of equal and hashcode contract, developers should override both methods in order to achieve a fully working equality mechanism --- it's not enough to just implement the equals() method.
+
+# String interview questions ?
+
+## Q1 are the below two equal ?.
+```aiexclude
+
+String s1 = "Hello";
+String s2 = new String("Hello");
+
+``` 
+* The two strings s1 and s2 in your example are not equal in terms of reference, but they are equal in terms of content. Let me explain this in detail:
+* The string "Hello" is a string literal. In Java, string literals are stored in the String Pool (a special memory area in the heap).
+* The new String("Hello") explicitly creates a new String object in the heap memory, even if "Hello" already exists in the String Pool. This means s2 points to a different object in memory than s1.
+* The == operator checks if s1 and s2 refer to the same object in memory. Which is false
+* The .equals() method checks if the content of the strings is the same. which is true
+
+## Q2 are the below two equal ?.
+```aiexclude
+
+String s1 = new String("Hello");
+String s2 = new String("Hello");
+
+```
+* No, s1 and s2 are not equal in terms of reference (s1 == s2 is false) because new String("Hello") creates two separate objects in the heap, so they do not point to the same memory location. 
+* However, they are equal in terms of content (s1.equals(s2) is true) because both strings contain the same characters, "Hello".
+* Always use .equals() to compare string content rather than ==, which checks reference equality.
+
+ 
