@@ -132,4 +132,18 @@ String s2 = new String("Hello");
 * However, they are equal in terms of content (s1.equals(s2) is true) because both strings contain the same characters, "Hello".
 * Always use .equals() to compare string content rather than ==, which checks reference equality.
 
- 
+
+## Q. String.intern() method explain what is it and also explain what threat can it cause in a microservice application if it is not used wisely ?.
+
+
+
+
+* The String.intern() method in Java is used to store a string in the String Pool (a special memory area in the heap). If the string already exists in the pool, it returns the reference to the existing string; otherwise, it adds the string to the pool. This helps save memory by reusing immutable strings.
+
+* Threat in Microservices: In a microservice application, excessive use of String.intern() can lead to memory pressure because the String Pool resides in the heap and is not garbage collected until the JVM shuts down. If large numbers of unique strings are interned (e.g., dynamic user inputs, IDs, or logs), it can cause OutOfMemoryError or degrade performance due to heap exhaustion. This is particularly dangerous in high-traffic microservices where strings are frequently created and interned. Use String.intern() cautiously, only for frequently reused strings, and avoid interned strings for dynamic or unpredictable data.
+
+
+
+
+
+
