@@ -6,33 +6,43 @@
    * Optimize Processes using same/existing resource -> Here you reconfigure your resource with much better storage and CPU.
 
 2. Preprocessing:
-   * Prepare and deploy in cold hours, you might also require a backup, May be master slave architecture
+   * Prepare and deploy in cold hours, you might also require a backup
+   
+3. BackUps: Replicas of system data or system as a whole
 
-3. Horizontal Scaling :
+4. Horizontal Scaling :
     * Buying and deploying more machines of similar type to share the load and optimize tasks
 
-4. Microservices Architecture:
+5. Microservices Architecture:
     * Distributes concerns and processes as miniature applications, or services
     * Decoupling-systems. 
    
-5. Distributed Systems:
+6. Distributed Systems:
     * Ensuring your application/ service has high availability, you need to make it fault-tolerant. 
     * A Distributed System is said to have its presence at more than one location
     * Example could be Dominoz Pizza shop, when you place an order on the app
     * Your order is routed to the closest hub and then it gets delivered to u.
 
-6. Load Balancing:
+7. Load Balancing:
     * When a user request comes in it reaches a central place, from where it can be rerouted
     * This rerouting tool is load balancer and there has to be a mechanism which ensures request re-routing based on parameters
 
-7. Decoupling of Systems:
+8. Decoupling of Systems:
     * Distributing services separately to ensure each of them is managed separately
     * Failure of one must not affect others
 
-8. Logging and metrics:
-    * To monitor health and metrices of the app
+9. Logging and metrics:
+    * To monitor health and metrics of the app
    
-9. Extensibility :
+10. Extensibility :
+    * The ability to extend a system
+    * To re-use your code/ algorithm
 
+---------------------------------------------
 
-9. 
+## Scaling:
+* The ability to make your application bigger by using bigger resources (Vertical scaling) or making using multiple resources of same or similar configs (Horizontal scaling)
+
+### Horizontal Scaling vs Vertical Scaling
+
+![img.png](img.png)
