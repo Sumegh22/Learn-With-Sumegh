@@ -46,4 +46,9 @@
 
 ### Horizontal Scaling vs Vertical Scaling
 
-![img.png](img.png)
+! [img1-scaling-comparison.png](img1-scaling-comparison.png).png](img1-scaling-comparison.png)
+
+
+## Capacity Planning and Estimation:
+
+! [img2-capacity-planning.png](img2-capacity-planning.png)
