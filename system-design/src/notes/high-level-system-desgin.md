@@ -42,7 +42,7 @@
 ---------------------------------------------
 
 ## Scaling:
-* The ability to make your application bigger by using bigger resources (Vertical scaling) or making using multiple resources of same or similar configs (Horizontal scaling)
+   * The ability to make your application bigger by using bigger resources (Vertical scaling) or making using multiple resources of same or similar configs (Horizontal scaling)
 
 ### Horizontal Scaling vs Vertical Scaling
 
@@ -50,5 +50,7 @@
 
 
 ## Capacity Planning and Estimation:
+   * Jot down few rough estimates to understand what are the bare minimum things to make an app up and running, 
+   * Based upon the features and functionalities that are to be provided
 
 ! [img2-capacity-planning.png](img2-capacity-planning.png)
