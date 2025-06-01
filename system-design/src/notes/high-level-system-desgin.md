@@ -43,6 +43,7 @@
 
 ## Scaling:
    * The ability to make your application bigger by using bigger resources (Vertical scaling) or making using multiple resources of same or similar configs (Horizontal scaling)
+   * Vertical Scaling : Deploying a bigger server to meet your demands. It can handle load, but it still is a single point of failure (SPOF)
 
 ### Horizontal Scaling vs Vertical Scaling
 
