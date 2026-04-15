@@ -39,7 +39,7 @@ https://github.com/kunal-kushwaha/DSA-Bootcamp-Java/tree/main/lectures/17-oop/no
 **Objects:** 
 - Object is an instance of a class. Like as I said class is a stencil, so object is something that is created using that stencil. Objects exists physically.
 
-- **Instance Variables:** vars defined inside an object, whose scope is limited to that particular obkect only are called instance vars
+- **Instance Variables:** vars defined inside an object, whose scope is limited to that particular object only are called instance vars
 - **Ref-variables:** vars named used for objects.
 
 Significance of "new" keyword, When we create any instance of a class, we create an object, this new keyword is used in scenario where we want to create a totally new object. it calls the constructor of class to create objects
@@ -126,7 +126,22 @@ Using weak references allows objects to be collected even if there are only weak
 
 	WeakReference<SomeClass> weakRef = new WeakReference<>(obj);
 	obj = null;
-	// The object can be garbage collected if there are no strong references to it
+	// The object can be garbage collected if there are no strong references to 
+
+
+	        String s = new String("Hello");
+        String s2 = "Hello";
+
+            System.out.println(s == s2); // false, because s is a new String object
+            System.out.println(s.equals(s2)); // true, because the content of the strings is the same
+            System.out.println(s.hashCode() == s2.hashCode()); // true, because the hash codes are based on the content of the strings
+
+        WeakReference<String> weakRef = new WeakReference<>(new String("Hello")); // Create a weak reference to the string s
+        s = null; // Remove strong reference to the string
+        System.gc(); // Suggest garbage collection
+        System.out.println("After GC, weak reference: " + weakRef.get()); // May print null if the string has been collected
+
+	
  
 Phantom References:
 Similar to weak references, but with stricter constraints. Phantom references are enqueued after the object is finalized.
