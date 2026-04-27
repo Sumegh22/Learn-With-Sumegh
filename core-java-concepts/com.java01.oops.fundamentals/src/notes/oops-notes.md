@@ -77,6 +77,56 @@ Student sumegh = new Student( 14, "Sumegh T", 98.09f)  then interanally it would
 	
 ---------------------------------------------
 
+Java 8, released in 2014, was arguably the most significant update in the language's history. It shifted Java from a strictly object-oriented paradigm toward **functional programming**, making code more concise and readable.
+
+Here are the heavy hitters that changed the way we write Java:
+
+---
+
+### 1. Lambda Expressions
+Before Java 8, if you wanted to pass logic to a method, you usually had to create an "Anonymous Inner Class"—which was incredibly wordy. Lambdas allow you to treat functionality as a method argument, or code as data.
+
+* **Before:** `new Thread(new Runnable() { public void run() { ... } }).start();`
+* **After:** `new Thread(() -> System.out.println("Running")).start();`
+
+### 2. Functional Interfaces
+A functional interface is an interface with **exactly one abstract method**. These are the foundation for Lambdas. Java 8 introduced the `@FunctionalInterface` annotation and several built-in interfaces in the `java.util.function` package:
+* `Predicate<T>`: Takes an object, returns a boolean.
+* `Function<T, R>`: Takes one type, returns another.
+* `Consumer<T>`: Takes an object, returns nothing (void).
+
+### 3. The Stream API (`java.util.stream`)
+Streams allow you to process sequences of elements (like Collections) in a declarative way—similar to SQL queries. You can filter, map, and reduce data without using explicit `for` loops.
+
+
+
+```java
+List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+List<String> filtered = names.stream()
+                             .filter(s -> s.startsWith("A"))
+                             .map(String::toUpperCase)
+                             .collect(Collectors.toList());
+```
+
+### 4. Default and Static Methods in Interfaces
+Previously, adding a method to an interface broke every class that implemented it. Java 8 solved this by allowing **default** methods with a body. This allowed the Java team to add the `forEach` method to the `Iterable` interface without breaking existing code.
+
+### 5. Method References
+This is a shorthand for lambdas that call a specific method. It makes the code even cleaner.
+* **Lambda:** `s -> System.out.println(s)`
+* **Method Reference:** `System.out::println`
+
+### 6. The `Optional<T>` Class
+To help combat the dreaded `NullPointerException`, Java 8 introduced `Optional`. It’s a container object which may or may not contain a non-null value. It forces the developer to think about the "empty" case.
+
+### 7. New Date and Time API (`java.time`)
+The old `java.util.Date` and `Calendar` were notoriously difficult to work with and were not thread-safe. The new API (inspired by Joda-Time) introduced immutable classes like `LocalDate`, `LocalTime`, and `ZonedDateTime`.
+
+### 8. Nashorn JavaScript Engine
+Java 8 replaced the old Rhino engine with **Nashorn**, allowing developers to execute JavaScript code dynamically on the JVM. (Note: This was later deprecated in Java 11 and removed in Java 15).
+
+----------
+
 ## Garbage collection and finalize:
 
 GB is an automatic process, managed by JVM. After any operation when a good amount of memory is utilized, the  JVM hits GC method, this first checks for objects that are unreferenced or idle. say the objects that are there in heap mem, but no ref variable is pointing to it, such things will be cleared.
